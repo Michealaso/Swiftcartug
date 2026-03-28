@@ -64,6 +64,11 @@ function saveProducts() {
   persistProducts();
   displayProducts();
   renderAdminProducts();
+let products = JSON.parse(localStorage.getItem("products")) || defaultProducts;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+if (!localStorage.getItem("products")) {
+  localStorage.setItem("products", JSON.stringify(defaultProducts));
 }
 
 function displayProducts() {
@@ -83,6 +88,12 @@ function displayProducts() {
         <img src="${product.img}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
         <h4>${product.name}</h4>
         <p>UGX ${Number(product.price).toLocaleString()}</p>
+  products.forEach((p, index) => {
+    list.innerHTML += `
+      <div class="card">
+        <img src="${p.img}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <p>UGX ${Number(p.price).toLocaleString()}</p>
         <button onclick="addToCart(${index})">Add to Cart</button>
       </div>`;
   });
@@ -102,6 +113,7 @@ function renderAdminProducts() {
       (product, index) => `
       <div class="admin-item">
         <img src="${product.img}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/120x120?text=No+Image'">
+        <img src="${product.img}" alt="${product.name}">
         <div>
           <h5>${product.name}</h5>
           <p>UGX ${Number(product.price).toLocaleString()}</p>
@@ -133,12 +145,26 @@ function addProduct() {
   }
 
   products.push(candidate);
+  const name = nameEl.value.trim();
+  const price = parseFloat(priceEl.value);
+  const img = imgEl.value.trim();
+function addProduct() {
+  const name = document.getElementById("pname").value.trim();
+  const price = parseFloat(document.getElementById("pprice").value);
+  const img = document.getElementById("pimg").value.trim();
+
+  if (!name || Number.isNaN(price) || price <= 0 || !img) {
+    return alert("Enter valid product details");
+  }
+
+  products.push({ name, price, img });
   saveProducts();
 
   nameEl.value = "";
   priceEl.value = "";
   imgEl.value = "";
   alert("Product added successfully.");
+  alert("Product Added!");
 }
 
 function editProduct(index) {
@@ -150,6 +176,8 @@ function editProduct(index) {
 
   const price = prompt("Edit product price:", String(current.price));
   if (price === null) return;
+  const priceInput = prompt("Edit product price:", current.price);
+  if (priceInput === null) return;
 
   const img = prompt("Edit product image URL:", current.img);
   if (img === null) return;
@@ -173,6 +201,17 @@ function editProduct(index) {
   });
 
   persistCart();
+  const price = parseFloat(priceInput);
+  if (!name.trim() || Number.isNaN(price) || price <= 0 || !img.trim()) {
+    return alert("Invalid details. Product not updated.");
+  }
+
+  products[index] = {
+    name: name.trim(),
+    price,
+    img: img.trim()
+  };
+
   saveProducts();
   updateCart();
   alert("Product updated.");
@@ -183,6 +222,8 @@ function deleteProduct(index) {
 
   const target = products[index];
   if (!confirm(`Delete ${target.name}?`)) return;
+  const shouldDelete = confirm(`Delete ${target.name}?`);
+  if (!shouldDelete) return;
 
   products.splice(index, 1);
   cart = cart.filter(
@@ -191,6 +232,7 @@ function deleteProduct(index) {
   );
 
   persistCart();
+  localStorage.setItem("cart", JSON.stringify(cart));
   saveProducts();
   updateCart();
 }
@@ -200,6 +242,15 @@ function addToCart(index) {
 
   cart.push({ ...products[index] });
   persistCart();
+  localStorage.setItem("products", JSON.stringify(products));
+  displayProducts();
+  alert("Product Added!");
+}
+
+function addToCart(index) {
+  if (!products[index]) return;
+  cart.push(products[index]);
+  localStorage.setItem("cart", JSON.stringify(cart));
   updateCart();
 }
 
@@ -208,6 +259,8 @@ function removeItem(index) {
 
   cart.splice(index, 1);
   persistCart();
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
   updateCart();
 }
 
@@ -269,6 +322,21 @@ function checkoutWhatsApp() {
   ].join("\n");
 
   window.open(`https://wa.me/256748348839?text=${encodeURIComponent(message)}`, "_blank");
+  const name = document.getElementById("custName").value;
+  const phone = document.getElementById("phone").value;
+  const location = document.getElementById("location").value;
+  const payment = document.getElementById("payment").value;
+
+  let message = `New Order:%0AName: ${name}%0APhone: ${phone}%0ALocation: ${location}%0APayment: ${payment}%0A%0AItems:%0A`;
+  let total = 0;
+
+  cart.forEach((item) => {
+    message += `- ${item.name} (UGX ${item.price})%0A`;
+    total += Number(item.price) || 0;
+  });
+
+  message += `%0ATotal: UGX ${total}`;
+  window.open(`https://wa.me/256748348839?text=${message}`, "_blank");
 }
 
 function toggleCart(event) {
@@ -293,6 +361,7 @@ document.addEventListener("click", function (event) {
   const adminPanel = document.querySelector(".admin");
   if (!adminPanel) return;
 
+if (document.querySelector(".admin")) {
   if (!localStorage.getItem("admin")) {
     const pass = prompt("Enter admin password to manage store:");
     if (pass === "admin123") {
@@ -302,6 +371,10 @@ document.addEventListener("click", function (event) {
     }
   }
 })();
+      document.querySelector(".admin").style.display = "none";
+    }
+  }
+}
 
 displayProducts();
 renderAdminProducts();
