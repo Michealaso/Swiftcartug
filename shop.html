@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftCart</title>
+<style>
+
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">SwiftCart UG</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+<a href="contact.html">Contact</a>
+</nav>
+</header>
+
+<div class="container">
+<h2>🔥 Trending Products</h2>
+<div class="products" id="product-list"></div>
+
+<!-- ADMIN PANEL -->
+<div class="admin">
+<h3>⚙️ Admin Panel (Add Product)</h3>
+<input type="text" id="pname" placeholder="Product Name">
+<input type="number" id="pprice" placeholder="Price">
+<input type="text" id="pimg" placeholder="Image URL">
+<button onclick="addProduct()">Add Product</button>
+</div>
+</div>
+
+<!-- Cart Button -->
+<div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
+
+<div id="cart">
+<h3>🛍 Cart</h3>
+<ul id="cart-items"></ul>
+<p><strong>Total: UGX <span id="total">0</span></strong></p>
+
+<h4>Checkout</h4>
+<input type="text" id="custName" placeholder="Your Name">
+<input type="text" id="phone" placeholder="Phone Number">
+<input type="text" id="location" placeholder="Delivery Location">
+<select id="payment">
+<option value="">Payment Method</option>
+<option value="Mobile Money">Mobile Money</option>
+<option value="Cash on Delivery">Cash on Delivery</option>
+</select>
+
+<button onclick="checkoutWhatsApp()" id="orderBtn">Order via WhatsApp</button>
+</div>
+
+<footer>
+<p>Fast delivery across Kampala | Pay with Mobile Money</p>
+<p>WhatsApp: +256748348839</p>
+</footer>
+
+<script src="app.js">
+    
+</script>
+
+</body>
+</html>
