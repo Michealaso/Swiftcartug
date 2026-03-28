@@ -44,6 +44,43 @@ function displayProducts() {
   });
 }
 
+function renderAdminProducts() {
+  const adminList = document.getElementById("adminProductList");
+  if (!adminList) return;
+
+  if (products.length === 0) {
+    adminList.innerHTML = '<p class="muted">No products yet.</p>';
+    return;
+  }
+
+  adminList.innerHTML = products
+    .map(
+      (product, index) => `
+      <div class="admin-item">
+        <img src="${product.img}" alt="${product.name}">
+        <div>
+          <h5>${product.name}</h5>
+          <p>UGX ${Number(product.price).toLocaleString()}</p>
+        </div>
+        <div class="admin-item-actions">
+          <button onclick="editProduct(${index})" class="btn-edit">Edit</button>
+          <button onclick="deleteProduct(${index})" class="btn-delete">Delete</button>
+        </div>
+      </div>`
+    )
+    .join("");
+}
+
+function addProduct() {
+  const nameEl = document.getElementById("pname");
+  const priceEl = document.getElementById("pprice");
+  const imgEl = document.getElementById("pimg");
+
+  if (!nameEl || !priceEl || !imgEl) return;
+
+  const name = nameEl.value.trim();
+  const price = parseFloat(priceEl.value);
+  const img = imgEl.value.trim();
 function addProduct() {
   const name = document.getElementById("pname").value.trim();
   const price = parseFloat(document.getElementById("pprice").value);
@@ -54,6 +91,61 @@ function addProduct() {
   }
 
   products.push({ name, price, img });
+  saveProducts();
+
+  nameEl.value = "";
+  priceEl.value = "";
+  imgEl.value = "";
+  alert("Product Added!");
+}
+
+function editProduct(index) {
+  if (!products[index]) return;
+
+  const current = products[index];
+  const name = prompt("Edit product name:", current.name);
+  if (name === null) return;
+
+  const priceInput = prompt("Edit product price:", current.price);
+  if (priceInput === null) return;
+
+  const img = prompt("Edit product image URL:", current.img);
+  if (img === null) return;
+
+  const price = parseFloat(priceInput);
+  if (!name.trim() || Number.isNaN(price) || price <= 0 || !img.trim()) {
+    return alert("Invalid details. Product not updated.");
+  }
+
+  products[index] = {
+    name: name.trim(),
+    price,
+    img: img.trim()
+  };
+
+  saveProducts();
+  updateCart();
+  alert("Product updated.");
+}
+
+function deleteProduct(index) {
+  if (!products[index]) return;
+
+  const target = products[index];
+  const shouldDelete = confirm(`Delete ${target.name}?`);
+  if (!shouldDelete) return;
+
+  products.splice(index, 1);
+  cart = cart.filter(
+    (item) =>
+      !(item.name === target.name && Number(item.price) === Number(target.price) && item.img === target.img)
+  );
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  saveProducts();
+  updateCart();
+}
+
   localStorage.setItem("products", JSON.stringify(products));
   displayProducts();
   alert("Product Added!");
@@ -139,4 +231,5 @@ if (document.querySelector(".admin")) {
 }
 
 displayProducts();
+renderAdminProducts();
 updateCart();

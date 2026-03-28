@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="promo-bar">⚡ Weekend deals live now • Free delivery over UGX 150,000</div>
+
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo">SwiftCart UG</div>
+      <span class="tag">Your trusted online store in Kampala</span>
   <header class="site-header">
     <div class="logo-wrap">
       <div class="logo">SwiftCart UG</div>
@@ -18,6 +24,68 @@
       <a href="contact.html">Contact</a>
     </nav>
   </header>
+
+  <main>
+    <section class="hero split-layout">
+      <div class="hero-copy">
+        <p class="eyebrow">SwiftCart Online</p>
+        <h1>Everything you need, delivered to your doorstep.</h1>
+        <p>Discover quality electronics, home essentials, and daily must-haves at great prices.</p>
+        <div class="hero-actions">
+          <a href="#product-list" class="cta">Shop Products</a>
+          <a href="shop.html" class="ghost-cta">View Full Catalog</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <article>
+          <strong>2,000+</strong>
+          <span>Orders fulfilled</span>
+        </article>
+        <article>
+          <strong>98%</strong>
+          <span>Customer satisfaction</span>
+        </article>
+        <article>
+          <strong>Same-day</strong>
+          <span>Delivery in Kampala</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="quick-filters">
+        <span>Popular:</span>
+        <button type="button">Electronics</button>
+        <button type="button">Kitchen</button>
+        <button type="button">Fashion</button>
+        <button type="button">Accessories</button>
+      </div>
+
+      <div class="section-head">
+        <h2>🔥 Trending Products</h2>
+        <span class="muted">Fresh picks updated daily</span>
+      </div>
+
+      <div class="products" id="product-list"></div>
+
+      <section class="admin">
+        <div class="admin-head">
+          <h3>⚙️ Admin Panel</h3>
+          <span class="muted">Add, edit, and delete products</span>
+        </div>
+        <div class="admin-form-grid">
+          <input type="text" id="pname" placeholder="Product Name">
+          <input type="number" id="pprice" placeholder="Price">
+        </div>
+        <input type="text" id="pimg" placeholder="Image URL">
+        <button onclick="addProduct()">Add Product</button>
+
+        <div class="admin-products-wrap">
+          <h4>Manage Products</h4>
+          <div id="adminProductList" class="admin-product-list"></div>
+        </div>
+      </section>
 
   <main>
     <section class="hero">
