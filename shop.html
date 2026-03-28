@@ -7,12 +7,10 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="promo-bar">🛍 Browse all categories • Smooth checkout on WhatsApp</div>
-
   <header class="site-header">
     <div class="logo-wrap">
       <div class="logo">SwiftCart UG</div>
-      <span class="tag">Your trusted online store in Kampala</span>
+      <span class="tag">Your online neighborhood store</span>
     </div>
     <nav>
       <a href="index.html">Home</a>
@@ -22,37 +20,19 @@
   </header>
 
   <main class="container">
-    <section class="catalog-head split-layout">
-      <div>
-        <p class="eyebrow">Product Catalog</p>
-        <h2>Find your next favorite item.</h2>
-        <p class="muted">Add products to cart and place your order instantly via WhatsApp checkout.</p>
-      </div>
-      <div class="hero-stats compact">
-        <article>
-          <strong>Secure</strong>
-          <span>Checkout flow</span>
-        </article>
-        <article>
-          <strong>Fast</strong>
-          <span>Order processing</span>
-        </article>
-      </div>
-    </section>
-
     <div class="section-head">
       <h2>🛒 All Products</h2>
-      <span class="muted">Tap “Add to Cart” to begin checkout</span>
+      <span class="muted">Browse and add items to your cart</span>
     </div>
     <div class="products" id="product-list"></div>
 
-    <section class="admin">
+    <div class="admin">
       <h3>⚙️ Admin Panel (Add Product)</h3>
       <input type="text" id="pname" placeholder="Product Name">
       <input type="number" id="pprice" placeholder="Price">
       <input type="text" id="pimg" placeholder="Image URL">
       <button onclick="addProduct()">Add Product</button>
-    </section>
+    </div>
   </main>
 
   <div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
