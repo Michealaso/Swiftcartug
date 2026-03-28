@@ -7,12 +7,10 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="promo-bar">⚡ Weekend deals live now • Free delivery over UGX 150,000</div>
-
   <header class="site-header">
     <div class="logo-wrap">
       <div class="logo">SwiftCart UG</div>
-      <span class="tag">Your trusted online store in Kampala</span>
+      <span class="tag">Shop smarter, delivered faster.</span>
     </div>
     <nav>
       <a href="index.html" class="active">Home</a>
@@ -22,56 +20,40 @@
   </header>
 
   <main>
-    <section class="hero split-layout">
-      <div class="hero-copy">
-        <p class="eyebrow">SwiftCart Online</p>
-        <h1>Everything you need, delivered to your doorstep.</h1>
-        <p>Discover quality electronics, home essentials, and daily must-haves at great prices.</p>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Online Superstore</p>
+        <h1>Your favorite products in one place.</h1>
+        <p>From electronics to kitchen essentials, SwiftCart helps you order quickly and get same-day delivery across Kampala.</p>
         <div class="hero-actions">
-          <a href="#product-list" class="cta">Shop Products</a>
-          <a href="shop.html" class="ghost-cta">View Full Catalog</a>
+          <a href="#product-list" class="cta">Start Shopping</a>
+          <span class="shipping">🚚 Free delivery on orders above UGX 150,000</span>
         </div>
       </div>
-
-      <div class="hero-stats">
-        <article>
-          <strong>2,000+</strong>
-          <span>Orders fulfilled</span>
-        </article>
-        <article>
-          <strong>98%</strong>
-          <span>Customer satisfaction</span>
-        </article>
-        <article>
-          <strong>Same-day</strong>
-          <span>Delivery in Kampala</span>
-        </article>
+      <div class="hero-panel">
+        <h3>Why shoppers choose us</h3>
+        <ul>
+          <li>✅ Secure checkout</li>
+          <li>✅ Mobile Money & Cash on Delivery</li>
+          <li>✅ Friendly WhatsApp support</li>
+        </ul>
       </div>
     </section>
 
     <section class="container">
-      <div class="quick-filters">
-        <span>Popular:</span>
-        <button type="button">Electronics</button>
-        <button type="button">Kitchen</button>
-        <button type="button">Fashion</button>
-        <button type="button">Accessories</button>
-      </div>
-
       <div class="section-head">
         <h2>🔥 Trending Products</h2>
-        <span class="muted">Fresh picks updated daily</span>
+        <span class="muted">Updated daily</span>
       </div>
-
       <div class="products" id="product-list"></div>
 
-      <section class="admin">
+      <div class="admin">
         <h3>⚙️ Admin Panel (Add Product)</h3>
         <input type="text" id="pname" placeholder="Product Name">
         <input type="number" id="pprice" placeholder="Price">
         <input type="text" id="pimg" placeholder="Image URL">
         <button onclick="addProduct()">Add Product</button>
-      </section>
+      </div>
     </section>
   </main>
 
