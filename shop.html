@@ -13,6 +13,10 @@
     <div class="logo-wrap">
       <div class="logo">SwiftCart UG</div>
       <span class="tag">Your trusted online store in Kampala</span>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo">SwiftCart UG</div>
+      <span class="tag">Your online neighborhood store</span>
     </div>
     <nav>
       <a href="index.html">Home</a>
@@ -47,12 +51,35 @@
     <div class="products" id="product-list"></div>
 
     <section class="admin">
+      <div class="admin-head">
+        <h3>⚙️ Admin Panel</h3>
+        <span class="muted">Add, edit, and delete products</span>
+      </div>
+      <div class="admin-form-grid">
+        <input type="text" id="pname" placeholder="Product Name">
+        <input type="number" id="pprice" placeholder="Price">
+      </div>
+      <input type="text" id="pimg" placeholder="Image URL">
+      <button onclick="addProduct()">Add Product</button>
+
+      <div class="admin-products-wrap">
+        <h4>Manage Products</h4>
+        <div id="adminProductList" class="admin-product-list"></div>
+      </div>
+    </section>
+    <div class="section-head">
+      <h2>🛒 All Products</h2>
+      <span class="muted">Browse and add items to your cart</span>
+    </div>
+    <div class="products" id="product-list"></div>
+
+    <div class="admin">
       <h3>⚙️ Admin Panel (Add Product)</h3>
       <input type="text" id="pname" placeholder="Product Name">
       <input type="number" id="pprice" placeholder="Price">
       <input type="text" id="pimg" placeholder="Image URL">
       <button onclick="addProduct()">Add Product</button>
-    </section>
+    </div>
   </main>
 
   <div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>

@@ -132,6 +132,16 @@
                     <p class="muted">Kampala • Ntinda • Najjera • Kisaasi • Muyenga • Entebbe Road</p>
                 </div>
             </aside>
+        <section class="contact-form-wrap">
+            <h2>Send a quick message</h2>
+            <p class="muted">This will open WhatsApp with your message pre-filled.</p>
+            <form id="contactForm" onsubmit="sendContactMessage(event)">
+                <input type="text" id="contactName" placeholder="Your Name" required>
+                <input type="tel" id="contactPhone" placeholder="Phone Number" required>
+                <input type="text" id="contactTopic" placeholder="Topic (e.g. Delivery, Payment)" required>
+                <textarea id="contactMessage" placeholder="Write your message" rows="5" required></textarea>
+                <button type="submit" id="btn">Send via WhatsApp</button>
+            </form>
         </section>
     </main>
 
