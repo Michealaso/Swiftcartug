@@ -28,12 +28,6 @@ if (!localStorage.getItem("products")) {
   localStorage.setItem("products", JSON.stringify(defaultProducts));
 }
 
-function saveProducts() {
-  localStorage.setItem("products", JSON.stringify(products));
-  displayProducts();
-  renderAdminProducts();
-}
-
 function displayProducts() {
   const list = document.getElementById("product-list");
   if (!list) return;
@@ -87,6 +81,10 @@ function addProduct() {
   const name = nameEl.value.trim();
   const price = parseFloat(priceEl.value);
   const img = imgEl.value.trim();
+function addProduct() {
+  const name = document.getElementById("pname").value.trim();
+  const price = parseFloat(document.getElementById("pprice").value);
+  const img = document.getElementById("pimg").value.trim();
 
   if (!name || Number.isNaN(price) || price <= 0 || !img) {
     return alert("Enter valid product details");
@@ -146,6 +144,11 @@ function deleteProduct(index) {
   localStorage.setItem("cart", JSON.stringify(cart));
   saveProducts();
   updateCart();
+}
+
+  localStorage.setItem("products", JSON.stringify(products));
+  displayProducts();
+  alert("Product Added!");
 }
 
 function addToCart(index) {
