@@ -3,6 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEO DropShip UG | Contact</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="contact">
+  <div class="topbar">📞 Need supplier or order support? We are online every day.</div>
+
+  <header class="header">
+    <a class="brand" href="index.html">MEO <span>DropShip</span></a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <main class="section">
+    <section class="contact-layout">
+      <article class="contact-box">
+        <h1>Talk to MEO Support</h1>
+        <p class="muted">Use this form to send a pre-filled WhatsApp message for order issues, product requests, or partnership support.</p>
+        <form id="contactForm" class="contact-form">
+          <input id="contactName" type="text" placeholder="Your name" required />
+          <input id="contactPhone" type="text" placeholder="Your phone" required />
+          <input id="contactTopic" type="text" placeholder="Topic" required />
+          <textarea id="contactMessage" rows="5" placeholder="Your message" required></textarea>
+          <button class="btn primary" type="submit">Send via WhatsApp</button>
+        </form>
+      </article>
+
+      <article class="contact-box">
+        <h3>Support Channels</h3>
+        <ul class="info-list">
+          <li><strong>WhatsApp:</strong> +256748348839</li>
+          <li><strong>Hours:</strong> 8:00 AM – 9:00 PM (Daily)</li>
+          <li><strong>Coverage:</strong> Kampala & surrounding towns</li>
+          <li><strong>Payments:</strong> Mobile Money, Cash on Delivery</li>
+        </ul>
+        <a class="btn success" href="https://wa.me/256748348839" target="_blank" rel="noopener">Open Direct Chat</a>
+      </article>
   <title>Support | MEO Drop</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -43,6 +82,11 @@
   </main>
 
   <footer class="footer">
+    <p>© 2026 MEO DropShip UG • Customer-first dropshipping operations.</p>
+  </footer>
+
+  <script>
+    document.getElementById('contactForm')?.addEventListener('submit', function (event) {
     <p>© 2026 MEO Drop. Built for modern dropshipping.</p>
     <p>Support WhatsApp: +256748348839</p>
   </footer>
@@ -60,6 +104,12 @@
         return;
       }
 
+      const text = encodeURIComponent(
+        `Support Request\nName: ${name}\nPhone: ${phone}\nTopic: ${topic}\nMessage: ${message}`
+      );
+      window.open(`https://wa.me/256748348839?text=${text}`, '_blank');
+    });
+  </script>
       const text = encodeURIComponent(`Support Request\nName: ${name}\nPhone: ${phone}\nTopic: ${topic}\nMessage: ${message}`);
       window.open(`https://wa.me/256748348839?text=${text}`, '_blank');
     }
