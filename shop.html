@@ -71,6 +71,99 @@
     <input id="custName" type="text" placeholder="Full Name" />
     <input id="phone" type="text" placeholder="Phone Number" />
     <input id="location" type="text" placeholder="Delivery Location" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | SwiftCart UG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="promo-bar">🛍 Browse all categories • Smooth checkout on WhatsApp</div>
+
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo">SwiftCart UG</div>
+      <span class="tag">Your trusted online store in Kampala</span>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo">SwiftCart UG</div>
+      <span class="tag">Your online neighborhood store</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="catalog-head split-layout">
+      <div>
+        <p class="eyebrow">Product Catalog</p>
+        <h2>Find your next favorite item.</h2>
+        <p class="muted">Add products to cart and place your order instantly via WhatsApp checkout.</p>
+      </div>
+      <div class="hero-stats compact">
+        <article>
+          <strong>Secure</strong>
+          <span>Checkout flow</span>
+        </article>
+        <article>
+          <strong>Fast</strong>
+          <span>Order processing</span>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-head">
+      <h2>🛒 All Products</h2>
+      <span class="muted">Tap “Add to Cart” to begin checkout</span>
+    </div>
+    <div class="products" id="product-list"></div>
+
+    <section class="admin">
+      <div class="admin-head">
+        <h3>⚙️ Admin Panel</h3>
+        <span class="muted">Add, edit, and delete products</span>
+      </div>
+      <div class="admin-form-grid">
+        <input type="text" id="pname" placeholder="Product Name">
+        <input type="number" id="pprice" placeholder="Price">
+      </div>
+      <input type="text" id="pimg" placeholder="Image URL">
+      <button onclick="addProduct()">Add Product</button>
+
+      <div class="admin-products-wrap">
+        <h4>Manage Products</h4>
+        <div id="adminProductList" class="admin-product-list"></div>
+      </div>
+    </section>
+    <div class="section-head">
+      <h2>🛒 All Products</h2>
+      <span class="muted">Browse and add items to your cart</span>
+    </div>
+    <div class="products" id="product-list"></div>
+
+    <div class="admin">
+      <h3>⚙️ Admin Panel (Add Product)</h3>
+      <input type="text" id="pname" placeholder="Product Name">
+      <input type="number" id="pprice" placeholder="Price">
+      <input type="text" id="pimg" placeholder="Image URL">
+      <button onclick="addProduct()">Add Product</button>
+    </section>
+    </div>
+  </main>
+
+  <div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
+
+  <aside id="cart">
+    <h3>🛍 Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: UGX <span id="total">0</span></strong></p>
+
+    <h4>Checkout</h4>
+    <input type="text" id="custName" placeholder="Your Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="location" placeholder="Delivery Location">
     <select id="payment">
       <option value="">Payment Method</option>
       <option value="Mobile Money">Mobile Money</option>
@@ -83,6 +176,12 @@
   <footer class="footer">
     <p>© 2026 MEO Drop. Built for modern dropshipping.</p>
     <p>Support WhatsApp: +256748348839</p>
+    <button onclick="checkoutWhatsApp()" id="orderBtn">Order via WhatsApp</button>
+  </aside>
+
+  <footer>
+    <p>Fast delivery across Kampala | Pay with Mobile Money</p>
+    <p>WhatsApp: +256748348839</p>
   </footer>
 
   <script src="app.js"></script>
