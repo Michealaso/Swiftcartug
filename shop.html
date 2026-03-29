@@ -12,6 +12,15 @@
   <header class="site-header">
     <a class="brand" href="index.html">MEO <span>Dropshipping</span></a>
     <nav>
+  <title>MEO DropShip UG | Shop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="shop">
+  <div class="topbar">🛒 Shop high-converting products for your dropshipping business</div>
+
+  <header class="header">
+    <a class="brand" href="index.html">MEO <span>DropShip</span></a>
+    <nav class="nav">
       <a href="index.html">Home</a>
       <a href="shop.html" class="active">Shop</a>
       <a href="contact.html">Contact</a>
@@ -71,6 +80,230 @@
     <input type="text" id="location" placeholder="Delivery location" />
     <select id="payment">
       <option value="">Payment method</option>
+    <button id="cartBtn" class="cart-btn" aria-label="Open cart">🛒 <span id="cartCount">0</span></button>
+  </header>
+
+  <main class="section">
+    <div class="section-head">
+      <h2>All Products</h2>
+      <span class="muted">Find products to list today</span>
+    </div>
+
+    <div class="toolbar">
+      <input id="searchInput" type="text" placeholder="Search products..." />
+      <select id="categoryFilter">
+        <option value="all">All categories</option>
+      </select>
+      <select id="sortSelect">
+        <option value="featured">Sort: Featured</option>
+        <option value="priceAsc">Price: Low to High</option>
+        <option value="priceDesc">Price: High to Low</option>
+        <option value="nameAsc">Name: A-Z</option>
+      </select>
+    </div>
+
+    <div id="productList" class="grid"></div>
+
+    <section class="admin" id="adminPanel">
+      <div class="section-head"><h2>⚙️ Admin Product Manager</h2><span class="muted">Manage inventory quickly</span></div>
+      <div class="admin-form">
+        <input id="pname" type="text" placeholder="Product name" />
+        <input id="pprice" type="number" placeholder="Price (UGX)" />
+        <input id="pcategory" type="text" placeholder="Category" />
+        <input id="pimg" type="text" placeholder="Image URL" />
+        <button id="addProductBtn" class="btn primary" type="button">Add Product</button>
+      </div>
+      <div id="adminList" class="admin-list"></div>
+    </section>
+  </main>
+
+  <aside id="cartDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <h3>🛍 Cart</h3>
+      <button id="closeCart" class="icon-btn" type="button">✕</button>
+    </div>
+    <ul id="cartItems" class="cart-items"></ul>
+    <p class="total">Total: UGX <span id="total">0</span></p>
+    <div class="checkout">
+      <input id="custName" type="text" placeholder="Customer name" />
+      <input id="phone" type="text" placeholder="Phone number" />
+      <input id="location" type="text" placeholder="Delivery location" />
+      <select id="payment">
+        <option value="">Payment method</option>
+        <option value="Mobile Money">Mobile Money</option>
+        <option value="Cash on Delivery">Cash on Delivery</option>
+      </select>
+      <button id="checkoutBtn" class="btn success" type="button">Checkout via WhatsApp</button>
+    </div>
+  </aside>
+
+  <div id="overlay" class="overlay"></div>
+
+  <footer class="footer">
+    <p>© 2026 MEO DropShip UG • Sell smarter, fulfill faster.</p>
+  <title>Shop | MEO Drop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="topbar">⚡ New arrivals daily | High-converting dropshipping picks</div>
+
+  <header class="header">
+    <a href="index.html" class="brand">MEO Drop</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="contact.html">Support</a>
+    </nav>
+    <button id="cartToggle" class="cart-toggle" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></button>
+  </header>
+
+  <main class="shell section">
+    <div class="section-head">
+      <h2>🛍 Product Catalog</h2>
+      <span class="muted">Search, filter, and add to cart</span>
+    </div>
+
+    <div class="shop-toolbar">
+      <input id="searchInput" type="text" placeholder="Search products..." oninput="applyFilters()" />
+      <select id="categoryFilter" onchange="applyFilters()">
+        <option value="all">All Categories</option>
+        <option value="Gadgets">Gadgets</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Home">Home</option>
+        <option value="Beauty">Beauty</option>
+      </select>
+    </div>
+
+    <div id="product-list" class="products"></div>
+
+    <section class="section admin" id="adminPanel">
+      <div class="section-head">
+        <h2>⚙️ Admin Product Manager</h2>
+        <span class="muted">Add, edit, and delete products instantly</span>
+      </div>
+
+      <div class="admin-form-grid">
+        <input id="pname" type="text" placeholder="Product Name" />
+        <input id="pprice" type="number" placeholder="Price" />
+        <input id="pimg" type="text" placeholder="Image URL" />
+        <select id="pcategory">
+          <option value="">Category</option>
+          <option value="Gadgets">Gadgets</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Home">Home</option>
+          <option value="Beauty">Beauty</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="addProduct()">Add Product</button>
+
+      <div id="adminProductList" class="admin-product-list"></div>
+    </section>
+  </main>
+
+  <aside id="cart" class="cart-drawer">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p class="total">Total: UGX <span id="total">0</span></p>
+
+    <h4>Checkout</h4>
+    <input id="custName" type="text" placeholder="Full Name" />
+    <input id="phone" type="text" placeholder="Phone Number" />
+    <input id="location" type="text" placeholder="Delivery Location" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | SwiftCart UG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="promo-bar">🛍 Browse all categories • Smooth checkout on WhatsApp</div>
+
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo">SwiftCart UG</div>
+      <span class="tag">Your trusted online store in Kampala</span>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo">SwiftCart UG</div>
+      <span class="tag">Your online neighborhood store</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="catalog-head split-layout">
+      <div>
+        <p class="eyebrow">Product Catalog</p>
+        <h2>Find your next favorite item.</h2>
+        <p class="muted">Add products to cart and place your order instantly via WhatsApp checkout.</p>
+      </div>
+      <div class="hero-stats compact">
+        <article>
+          <strong>Secure</strong>
+          <span>Checkout flow</span>
+        </article>
+        <article>
+          <strong>Fast</strong>
+          <span>Order processing</span>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-head">
+      <h2>🛒 All Products</h2>
+      <span class="muted">Tap “Add to Cart” to begin checkout</span>
+    </div>
+    <div class="products" id="product-list"></div>
+
+    <section class="admin">
+      <div class="admin-head">
+        <h3>⚙️ Admin Panel</h3>
+        <span class="muted">Add, edit, and delete products</span>
+      </div>
+      <div class="admin-form-grid">
+        <input type="text" id="pname" placeholder="Product Name">
+        <input type="number" id="pprice" placeholder="Price">
+      </div>
+      <input type="text" id="pimg" placeholder="Image URL">
+      <button onclick="addProduct()">Add Product</button>
+
+      <div class="admin-products-wrap">
+        <h4>Manage Products</h4>
+        <div id="adminProductList" class="admin-product-list"></div>
+      </div>
+    </section>
+    <div class="section-head">
+      <h2>🛒 All Products</h2>
+      <span class="muted">Browse and add items to your cart</span>
+    </div>
+    <div class="products" id="product-list"></div>
+
+    <div class="admin">
+      <h3>⚙️ Admin Panel (Add Product)</h3>
+      <input type="text" id="pname" placeholder="Product Name">
+      <input type="number" id="pprice" placeholder="Price">
+      <input type="text" id="pimg" placeholder="Image URL">
+      <button onclick="addProduct()">Add Product</button>
+    </section>
+    </div>
+  </main>
+
+  <div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
+
+  <aside id="cart">
+    <h3>🛍 Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: UGX <span id="total">0</span></strong></p>
+
+    <h4>Checkout</h4>
+    <input type="text" id="custName" placeholder="Your Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="location" placeholder="Delivery Location">
+    <select id="payment">
+      <option value="">Payment Method</option>
       <option value="Mobile Money">Mobile Money</option>
       <option value="Cash on Delivery">Cash on Delivery</option>
     </select>
@@ -81,6 +314,18 @@
   <footer>
     <p>MEO Dropshipping • Built for modern online selling</p>
     <p>WhatsApp Support: +256748348839</p>
+    <button class="btn btn-success" onclick="checkoutWhatsApp()">Place Order on WhatsApp</button>
+  </aside>
+
+  <footer class="footer">
+    <p>© 2026 MEO Drop. Built for modern dropshipping.</p>
+    <p>Support WhatsApp: +256748348839</p>
+    <button onclick="checkoutWhatsApp()" id="orderBtn">Order via WhatsApp</button>
+  </aside>
+
+  <footer>
+    <p>Fast delivery across Kampala | Pay with Mobile Money</p>
+    <p>WhatsApp: +256748348839</p>
   </footer>
 
   <script src="app.js"></script>
