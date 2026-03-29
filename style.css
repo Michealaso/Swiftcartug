@@ -415,3 +415,25 @@ footer p { margin: 4px 0; }
     grid-template-columns: 1fr;
   }
 }
+
+#adminLoginBtn,
+#saveProductBtn,
+#adminLogoutBtn {
+  border: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#adminLoginBtn,
+#saveProductBtn {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), #0f766e);
+}
+
+#adminLogoutBtn {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  color: #344054;
+}
