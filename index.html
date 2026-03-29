@@ -12,6 +12,122 @@
   <header class="header">
     <a class="brand" href="index.html">MEO <span>DropShip</span></a>
     <nav class="nav">
+  <title>MEO Drop | Modern Dropshipping Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="topbar">🚚 24-48hr dispatch | 💳 Secure checkout | 📦 Real-time order updates</div>
+
+  <header class="header">
+    <a href="index.html" class="brand">MEO Drop</a>
+    <nav class="nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Support</a>
+    </nav>
+    <button id="cartToggle" class="cart-toggle" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></button>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <div>
+        <p class="eyebrow">MEO DROPSHIPPING STORE</p>
+        <h1>Trending products that sell fast.</h1>
+        <p>Build your winning product lineup with reliable suppliers, fast fulfillment, and conversion-ready offers.</p>
+        <div class="hero-actions">
+          <a href="shop.html" class="btn btn-primary">Start Shopping</a>
+          <a href="#featuredProducts" class="btn btn-ghost">View Best Sellers</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Why MEO Drop?</h3>
+        <ul>
+          <li>✔ Handpicked winning products</li>
+          <li>✔ Mobile Money + Cash on Delivery</li>
+          <li>✔ WhatsApp-first order support</li>
+          <li>✔ Fast order processing workflow</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="shell stats-grid">
+      <article><strong>1,200+</strong><span>Products shipped</span></article>
+      <article><strong>98%</strong><span>Order success rate</span></article>
+      <article><strong>24/7</strong><span>Support response</span></article>
+      <article><strong>Same Day</strong><span>Processing on top sellers</span></article>
+    </section>
+
+    <section class="shell section" id="featuredProducts">
+      <div class="section-head">
+        <h2>🔥 Featured Products</h2>
+        <a href="shop.html" class="text-link">See all products →</a>
+      </div>
+      <div id="product-list" class="products"></div>
+    </section>
+
+    <section class="shell section admin" id="adminPanel">
+      <div class="section-head">
+        <h2>⚙️ Admin Product Manager</h2>
+        <span class="muted">Add, edit, and delete products instantly</span>
+      </div>
+
+      <div class="admin-form-grid">
+        <input id="pname" type="text" placeholder="Product Name" />
+        <input id="pprice" type="number" placeholder="Price" />
+        <input id="pimg" type="text" placeholder="Image URL" />
+        <select id="pcategory">
+          <option value="">Category</option>
+          <option value="Gadgets">Gadgets</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Home">Home</option>
+          <option value="Beauty">Beauty</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="addProduct()">Add Product</button>
+
+      <div id="adminProductList" class="admin-product-list"></div>
+    </section>
+  </main>
+
+  <aside id="cart" class="cart-drawer">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p class="total">Total: UGX <span id="total">0</span></p>
+
+    <h4>Checkout</h4>
+    <input id="custName" type="text" placeholder="Full Name" />
+    <input id="phone" type="text" placeholder="Phone Number" />
+    <input id="location" type="text" placeholder="Delivery Location" />
+    <select id="payment">
+      <option value="">Payment Method</option>
+      <option value="Mobile Money">Mobile Money</option>
+      <option value="Cash on Delivery">Cash on Delivery</option>
+    </select>
+
+    <button class="btn btn-success" onclick="checkoutWhatsApp()">Place Order on WhatsApp</button>
+  </aside>
+
+  <footer class="footer">
+    <p>© 2026 MEO Drop. Built for modern dropshipping.</p>
+    <p>Support WhatsApp: +256748348839</p>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwiftCart UG | Everyday Online Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="promo-bar">⚡ Weekend deals live now • Free delivery over UGX 150,000</div>
+
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo">SwiftCart UG</div>
+      <span class="tag">Your trusted online store in Kampala</span>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <div class="logo">SwiftCart UG</div>
+      <span class="tag">Shop smarter, delivered faster.</span>
+    </div>
+    <nav>
       <a href="index.html" class="active">Home</a>
       <a href="shop.html">Shop</a>
       <a href="contact.html">Contact</a>
@@ -108,6 +224,226 @@
 
   <footer class="footer">
     <p>© 2026 MEO DropShip UG • Build your winning store faster.</p>
+  </header>
+
+  <main>
+    <section class="hero split-layout">
+      <div class="hero-copy">
+        <p class="eyebrow">SwiftCart Online</p>
+        <h1>Everything you need, delivered to your doorstep.</h1>
+        <p>Discover quality electronics, home essentials, and daily must-haves at great prices.</p>
+        <div class="hero-actions">
+          <a href="#product-list" class="cta">Shop Products</a>
+          <a href="shop.html" class="ghost-cta">View Full Catalog</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <article>
+          <strong>2,000+</strong>
+          <span>Orders fulfilled</span>
+        </article>
+        <article>
+          <strong>98%</strong>
+          <span>Customer satisfaction</span>
+        </article>
+        <article>
+          <strong>Same-day</strong>
+          <span>Delivery in Kampala</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="quick-filters">
+        <span>Popular:</span>
+        <button type="button">Electronics</button>
+        <button type="button">Kitchen</button>
+        <button type="button">Fashion</button>
+        <button type="button">Accessories</button>
+      </div>
+
+      <div class="section-head">
+        <h2>🔥 Trending Products</h2>
+        <span class="muted">Fresh picks updated daily</span>
+      </div>
+
+      <div class="products" id="product-list"></div>
+
+      <section class="admin">
+        <h3>⚙️ Admin Panel (Add Product)</h3>
+        <input type="text" id="pname" placeholder="Product Name">
+        <input type="number" id="pprice" placeholder="Price">
+        <input type="text" id="pimg" placeholder="Image URL">
+        <button onclick="addProduct()">Add Product</button>
+      </section>
+    </section>
+  </main>
+
+  <div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
+
+  <aside id="cart">
+    <h3>🛍 Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: UGX <span id="total">0</span></strong></p>
+
+    <h4>Checkout</h4>
+    <input type="text" id="custName" placeholder="Your Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="location" placeholder="Delivery Location">
+    <select id="payment">
+      <option value="">Payment Method</option>
+      <option value="Mobile Money">Mobile Money</option>
+      <option value="Cash on Delivery">Cash on Delivery</option>
+    </select>
+
+    <button onclick="checkoutWhatsApp()" id="orderBtn">Order via WhatsApp</button>
+  </aside>
+
+
+    <section class="container">
+      <div class="quick-filters">
+        <span>Popular:</span>
+        <button type="button">Electronics</button>
+        <button type="button">Kitchen</button>
+        <button type="button">Fashion</button>
+        <button type="button">Accessories</button>
+      </div>
+
+      <div class="section-head">
+        <h2>🔥 Trending Products</h2>
+        <span class="muted">Fresh picks updated daily</span>
+      </div>
+
+      <div class="products" id="product-list"></div>
+
+      <section class="admin">
+        <div class="admin-head">
+          <h3>⚙️ Admin Panel</h3>
+          <span class="muted">Add, edit, and delete products</span>
+        </div>
+        <div class="admin-form-grid">
+          <input type="text" id="pname" placeholder="Product Name">
+          <input type="number" id="pprice" placeholder="Price">
+        </div>
+        <input type="text" id="pimg" placeholder="Image URL">
+        <button onclick="addProduct()">Add Product</button>
+
+        <div class="admin-products-wrap">
+          <h4>Manage Products</h4>
+          <div id="adminProductList" class="admin-product-list"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
+
+  <aside id="cart">
+    <h3>🛍 Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: UGX <span id="total">0</span></strong></p>
+
+    <h4>Checkout</h4>
+    <input type="text" id="custName" placeholder="Your Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="location" placeholder="Delivery Location">
+    <select id="payment">
+      <option value="">Payment Method</option>
+      <option value="Mobile Money">Mobile Money</option>
+      <option value="Cash on Delivery">Cash on Delivery</option>
+    </select>
+
+    <button onclick="checkoutWhatsApp()" id="orderBtn">Order via WhatsApp</button>
+  </aside>
+
+
+      <div class="section-head">
+        <h2>🔥 Trending Products</h2>
+        <span class="muted">Fresh picks updated daily</span>
+      </div>
+
+      <div class="products" id="product-list"></div>
+
+      <section class="admin">
+        <div class="admin-head">
+          <h3>⚙️ Admin Panel</h3>
+          <span class="muted">Add, edit, and delete products</span>
+        </div>
+        <div class="admin-form-grid">
+          <input type="text" id="pname" placeholder="Product Name">
+          <input type="number" id="pprice" placeholder="Price">
+        </div>
+        <input type="text" id="pimg" placeholder="Image URL">
+        <button onclick="addProduct()">Add Product</button>
+
+        <div class="admin-products-wrap">
+          <h4>Manage Products</h4>
+          <div id="adminProductList" class="admin-product-list"></div>
+        </div>
+      </section>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Online Superstore</p>
+        <h1>Your favorite products in one place.</h1>
+        <p>From electronics to kitchen essentials, SwiftCart helps you order quickly and get same-day delivery across Kampala.</p>
+        <div class="hero-actions">
+          <a href="#product-list" class="cta">Start Shopping</a>
+          <span class="shipping">🚚 Free delivery on orders above UGX 150,000</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <h3>Why shoppers choose us</h3>
+        <ul>
+          <li>✅ Secure checkout</li>
+          <li>✅ Mobile Money & Cash on Delivery</li>
+          <li>✅ Friendly WhatsApp support</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="section-head">
+        <h2>🔥 Trending Products</h2>
+        <span class="muted">Updated daily</span>
+      </div>
+      <div class="products" id="product-list"></div>
+
+      <div class="admin">
+        <h3>⚙️ Admin Panel (Add Product)</h3>
+        <input type="text" id="pname" placeholder="Product Name">
+        <input type="number" id="pprice" placeholder="Price">
+        <input type="text" id="pimg" placeholder="Image URL">
+        <button onclick="addProduct()">Add Product</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
+
+  <aside id="cart">
+    <h3>🛍 Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: UGX <span id="total">0</span></strong></p>
+
+    <h4>Checkout</h4>
+    <input type="text" id="custName" placeholder="Your Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="location" placeholder="Delivery Location">
+    <select id="payment">
+      <option value="">Payment Method</option>
+      <option value="Mobile Money">Mobile Money</option>
+      <option value="Cash on Delivery">Cash on Delivery</option>
+    </select>
+
+    <button onclick="checkoutWhatsApp()" id="orderBtn">Order via WhatsApp</button>
+  </aside>
+
+  <footer>
+    <p>Fast delivery across Kampala | Pay with Mobile Money</p>
+    <p>WhatsApp: +256748348839</p>
   </footer>
 
   <script src="app.js"></script>
