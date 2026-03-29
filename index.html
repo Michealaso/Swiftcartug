@@ -70,6 +70,53 @@
       <div class="products" id="product-list"></div>
 
       <section class="admin">
+        <h3>⚙️ Admin Panel (Add Product)</h3>
+        <input type="text" id="pname" placeholder="Product Name">
+        <input type="number" id="pprice" placeholder="Price">
+        <input type="text" id="pimg" placeholder="Image URL">
+        <button onclick="addProduct()">Add Product</button>
+      </section>
+    </section>
+  </main>
+
+  <div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
+
+  <aside id="cart">
+    <h3>🛍 Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total: UGX <span id="total">0</span></strong></p>
+
+    <h4>Checkout</h4>
+    <input type="text" id="custName" placeholder="Your Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="location" placeholder="Delivery Location">
+    <select id="payment">
+      <option value="">Payment Method</option>
+      <option value="Mobile Money">Mobile Money</option>
+      <option value="Cash on Delivery">Cash on Delivery</option>
+    </select>
+
+    <button onclick="checkoutWhatsApp()" id="orderBtn">Order via WhatsApp</button>
+  </aside>
+
+
+    <section class="container">
+      <div class="quick-filters">
+        <span>Popular:</span>
+        <button type="button">Electronics</button>
+        <button type="button">Kitchen</button>
+        <button type="button">Fashion</button>
+        <button type="button">Accessories</button>
+      </div>
+
+      <div class="section-head">
+        <h2>🔥 Trending Products</h2>
+        <span class="muted">Fresh picks updated daily</span>
+      </div>
+
+      <div class="products" id="product-list"></div>
+
+      <section class="admin">
         <div class="admin-head">
           <h3>⚙️ Admin Panel</h3>
           <span class="muted">Add, edit, and delete products</span>
