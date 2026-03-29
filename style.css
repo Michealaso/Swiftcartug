@@ -310,6 +310,24 @@ input, select, textarea {
 }
 #cart.open { display: block; }
 
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.icon-close {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: #344054;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 #cart-items { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 #cart-items li {
   border: 1px solid var(--line);
@@ -326,6 +344,19 @@ input, select, textarea {
   border-radius: 6px;
   padding: 2px 7px;
   cursor: pointer;
+}
+
+.qty-controls .danger {
+  border-color: #fecaca;
+  color: #b42318;
+  background: #fff5f5;
+}
+
+.line-total {
+  margin: 5px 0 0;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: .82rem;
 }
 
 .cart-total { font-weight: 800; margin: 10px 0; }

@@ -223,6 +223,7 @@ function updateCart() {
   const list = document.getElementById("cart-items");
   const totalEl = document.getElementById("total");
   const countEl = document.getElementById("cartCount");
+  const emptyHint = document.getElementById("cartEmptyHint");
   if (!list || !totalEl || !countEl) return;
 
   const validIds = new Set(products.map((p) => p.id));
@@ -233,21 +234,24 @@ function updateCart() {
 
   if (cart.length === 0) {
     list.innerHTML = "<li>Your cart is empty.</li>";
+    if (emptyHint) emptyHint.style.display = "block";
   } else {
+    if (emptyHint) emptyHint.style.display = "none";
     list.innerHTML = cart.map((item) => {
       const product = products.find((p) => p.id === item.productId);
       if (!product) return "";
       total += product.price * item.qty;
       count += item.qty;
       return `<li>
-        <div>
+        <div class="cart-item-main">
           <strong>${escapeHTML(product.name)}</strong><br>
           <small>UGX ${product.price.toLocaleString()} × ${item.qty}</small>
+          <p class="line-total">UGX ${(product.price * item.qty).toLocaleString()}</p>
         </div>
         <div class="qty-controls">
           <button onclick="changeQty('${item.productId}', -1)">-</button>
           <button onclick="changeQty('${item.productId}', 1)">+</button>
-          <button onclick="removeItem('${item.productId}')">x</button>
+          <button class="danger" onclick="removeItem('${item.productId}')">x</button>
         </div>
       </li>`;
     }).join("");
@@ -300,6 +304,12 @@ function toggleCart(event) {
   const cartEl = document.getElementById("cart");
   if (!cartEl) return;
   cartEl.classList.toggle("open");
+}
+
+function closeCart() {
+  const cartEl = document.getElementById("cart");
+  if (!cartEl) return;
+  cartEl.classList.remove("open");
 }
 
 document.addEventListener("click", (event) => {

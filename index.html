@@ -67,8 +67,12 @@
   <button id="cartButton" onclick="toggleCart(event)">🛒 Cart <span id="cartCount">0</span></button>
 
   <aside id="cart">
-    <h3>Your Cart</h3>
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="icon-close" onclick="closeCart()">✕</button>
+    </div>
     <ul id="cart-items"></ul>
+    <p id="cartEmptyHint" class="muted">Add items to begin checkout.</p>
     <p class="cart-total">Total: UGX <span id="total">0</span></p>
 
     <h4>Checkout Details</h4>
