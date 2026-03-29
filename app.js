@@ -1,7 +1,5 @@
 function createId() {
-  if (globalThis.crypto && typeof globalThis.crypto.randomUUID === "function") {
-    return globalThis.crypto.randomUUID();
-  }
+  if (globalThis.crypto && typeof globalThis.crypto.randomUUID === "function") return globalThis.crypto.randomUUID();
   return `p_${Date.now()}_${Math.random().toString(16).slice(2)}`;
 }
 
@@ -27,8 +25,8 @@ function safeRead(key, fallback) {
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return fallback;
-    const data = JSON.parse(raw);
-    return Array.isArray(data) ? data : fallback;
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : fallback;
   } catch {
     return fallback;
   }
@@ -48,9 +46,9 @@ function normalizeProduct(item) {
 function normalizeCartItem(item) {
   if (!item || typeof item !== "object") return null;
   const productId = String(item.productId || "").trim();
-  const qty = Number(item.qty);
+  const qty = Math.floor(Number(item.qty));
   if (!productId || Number.isNaN(qty) || qty <= 0) return null;
-  return { productId, qty: Math.floor(qty) };
+  return { productId, qty };
 }
 
 let products = safeRead("swiftcart_products", []).map(normalizeProduct).filter(Boolean);
@@ -60,62 +58,28 @@ if (products.length === 0) {
 }
 
 let cart = safeRead("swiftcart_cart", []).map(normalizeCartItem).filter(Boolean);
-cart = cart.filter((item) => products.some((p) => p.id === item.productId));
+cart = cart.filter((i) => products.some((p) => p.id === i.productId));
 
-let editingProductId = null;
-
-function saveProducts() {
-  localStorage.setItem("swiftcart_products", JSON.stringify(products));
-}
-
-function saveCart() {
-  localStorage.setItem("swiftcart_cart", JSON.stringify(cart));
-}
-
-function getFormElements() {
-  return {
-    nameEl: document.getElementById("pname"),
-    priceEl: document.getElementById("pprice"),
-    imgEl: document.getElementById("pimg"),
-    categoryEl: document.getElementById("pcategory"),
-    saveBtn: document.getElementById("saveProductBtn"),
-    cancelBtn: document.getElementById("cancelEditBtn")
-  };
-}
-
-function resetAdminForm() {
-  const { nameEl, priceEl, imgEl, categoryEl, saveBtn, cancelBtn } = getFormElements();
-  if (!nameEl || !priceEl || !imgEl || !categoryEl) return;
-
-  nameEl.value = "";
-  priceEl.value = "";
-  imgEl.value = "";
-  categoryEl.value = "";
-
-  editingProductId = null;
-  if (saveBtn) saveBtn.textContent = "Add Product";
-  if (cancelBtn) cancelBtn.style.display = "none";
-}
+function saveProducts() { localStorage.setItem("swiftcart_products", JSON.stringify(products)); }
+function saveCart() { localStorage.setItem("swiftcart_cart", JSON.stringify(cart)); }
 
 function renderProductGrid(targetId, list) {
   const grid = document.getElementById(targetId);
   if (!grid) return;
-
   if (list.length === 0) {
     grid.innerHTML = '<p class="muted">No products found.</p>';
     return;
   }
 
-  grid.innerHTML = list
-    .map((p) => `
-      <article class="card">
-        <img src="${p.img}" alt="${escapeHTML(p.name)}" onerror="this.src='https://via.placeholder.com/500x350?text=No+Image'" />
-        <span class="chip">${escapeHTML(p.category)}</span>
-        <h4>${escapeHTML(p.name)}</h4>
-        <p>UGX ${p.price.toLocaleString()}</p>
-        <button onclick="addToCart('${p.id}')">Add to Cart</button>
-      </article>`)
-    .join("");
+  grid.innerHTML = list.map((p) => `
+    <article class="card">
+      <img src="${p.img}" alt="${escapeHTML(p.name)}" onerror="this.src='https://via.placeholder.com/500x350?text=No+Image'" />
+      <span class="chip">${escapeHTML(p.category)}</span>
+      <h4>${escapeHTML(p.name)}</h4>
+      <p>UGX ${p.price.toLocaleString()}</p>
+      <button onclick="addToCart('${p.id}')">Add to Cart</button>
+    </article>
+  `).join("");
 }
 
 function renderFeatured() {
@@ -126,7 +90,6 @@ function renderFeatured() {
 function populateCategoryFilter() {
   const select = document.getElementById("categoryFilter");
   if (!select) return;
-
   const categories = [...new Set(products.map((p) => p.category))].sort((a, b) => a.localeCompare(b));
   select.innerHTML = '<option value="all">All categories</option>';
   categories.forEach((cat) => {
@@ -135,16 +98,12 @@ function populateCategoryFilter() {
 }
 
 function applyFilters() {
-  const searchEl = document.getElementById("searchInput");
-  const categoryEl = document.getElementById("categoryFilter");
-  const sortEl = document.getElementById("sortBy");
+  const search = (document.getElementById("searchInput")?.value || "").trim().toLowerCase();
+  const category = document.getElementById("categoryFilter")?.value || "all";
+  const sortBy = document.getElementById("sortBy")?.value || "default";
 
   let list = [...products];
-  const term = (searchEl?.value || "").trim().toLowerCase();
-  const category = categoryEl?.value || "all";
-  const sortBy = sortEl?.value || "default";
-
-  if (term) list = list.filter((p) => p.name.toLowerCase().includes(term) || p.category.toLowerCase().includes(term));
+  if (search) list = list.filter((p) => p.name.toLowerCase().includes(search) || p.category.toLowerCase().includes(search));
   if (category !== "all") list = list.filter((p) => p.category === category);
   if (sortBy === "price-asc") list.sort((a, b) => a.price - b.price);
   if (sortBy === "price-desc") list.sort((a, b) => b.price - a.price);
@@ -155,12 +114,59 @@ function applyFilters() {
   if (meta) meta.textContent = `${list.length} item${list.length === 1 ? "" : "s"}`;
 }
 
+function isAdmin() {
+  return localStorage.getItem("swiftcart_admin") === "true";
+}
+
+function updateAdminUI() {
+  const panel = document.getElementById("adminPanel");
+  if (!panel) return;
+
+  const status = document.getElementById("adminStatus");
+  const loginBtn = document.getElementById("adminLoginBtn");
+  const formArea = document.getElementById("adminFormArea");
+
+  if (isAdmin()) {
+    if (status) status.textContent = "Unlocked";
+    if (loginBtn) loginBtn.style.display = "none";
+    if (formArea) formArea.style.display = "block";
+  } else {
+    if (status) status.textContent = "Locked";
+    if (loginBtn) loginBtn.style.display = "block";
+    if (formArea) formArea.style.display = "none";
+  }
+}
+
+function adminLogin() {
+  const password = prompt("Enter admin password:");
+  if (password === "admin123") {
+    localStorage.setItem("swiftcart_admin", "true");
+    updateAdminUI();
+  } else {
+    alert("Wrong password.");
+  }
+}
+
+function adminLogout() {
+  localStorage.removeItem("swiftcart_admin");
+  updateAdminUI();
+}
+
 function addProduct() {
-  const { nameEl, priceEl, imgEl, categoryEl } = getFormElements();
+  if (!isAdmin()) {
+    alert("Only admin can add products.");
+    return;
+  }
+
+  const nameEl = document.getElementById("pname");
+  const priceEl = document.getElementById("pprice");
+  const imgEl = document.getElementById("pimg");
+  const categoryEl = document.getElementById("pcategory");
+
   if (!nameEl || !priceEl || !imgEl || !categoryEl) return;
 
-  const normalized = normalizeProduct({
-    id: editingProductId || createId(),
+  const product = normalizeProduct({
+    id: createId(),
     name: nameEl.value,
     price: Number(priceEl.value),
     img: imgEl.value,
@@ -168,91 +174,27 @@ function addProduct() {
     featured: false
   });
 
-  if (!normalized) {
+  if (!product) {
     alert("Please enter valid product details.");
     return;
   }
 
-  if (editingProductId) {
-    const index = products.findIndex((p) => p.id === editingProductId);
-    if (index >= 0) products[index] = { ...products[index], ...normalized };
-  } else {
-    products.unshift(normalized);
-  }
-
+  products.unshift(product);
   saveProducts();
   refreshShopViews();
-  resetAdminForm();
-}
 
-function startEditProduct(id) {
-  const product = products.find((p) => p.id === id);
-  if (!product) return;
-
-  const { nameEl, priceEl, imgEl, categoryEl, saveBtn, cancelBtn } = getFormElements();
-  if (!nameEl || !priceEl || !imgEl || !categoryEl) return;
-
-  nameEl.value = product.name;
-  priceEl.value = product.price;
-  imgEl.value = product.img;
-  categoryEl.value = product.category;
-
-  editingProductId = id;
-  if (saveBtn) saveBtn.textContent = "Update Product";
-  if (cancelBtn) cancelBtn.style.display = "block";
-}
-
-function cancelEdit() {
-  resetAdminForm();
-}
-
-function renderAdminProducts() {
-  const list = document.getElementById("adminProductList");
-  if (!list) return;
-
-  if (products.length === 0) {
-    list.innerHTML = '<p class="muted">No products available.</p>';
-    return;
-  }
-
-  list.innerHTML = products
-    .map((p) => `
-      <div class="admin-item">
-        <img src="${p.img}" alt="${escapeHTML(p.name)}" onerror="this.src='https://via.placeholder.com/140x140?text=No+Image'" />
-        <div>
-          <h5>${escapeHTML(p.name)}</h5>
-          <p>${escapeHTML(p.category)} • UGX ${p.price.toLocaleString()}</p>
-        </div>
-        <div class="admin-actions">
-          <button class="btn-small" onclick="startEditProduct('${p.id}')">Edit</button>
-          <button class="btn-small danger" onclick="deleteProduct('${p.id}')">Delete</button>
-        </div>
-      </div>`)
-    .join("");
-}
-
-function deleteProduct(id) {
-  const target = products.find((p) => p.id === id);
-  if (!target) return;
-  if (!confirm(`Delete ${target.name}?`)) return;
-
-  products = products.filter((p) => p.id !== id);
-  cart = cart.filter((c) => c.productId !== id);
-
-  saveProducts();
-  saveCart();
-  refreshShopViews();
-  updateCart();
-
-  if (editingProductId === id) resetAdminForm();
+  nameEl.value = "";
+  priceEl.value = "";
+  imgEl.value = "";
+  categoryEl.value = "";
 }
 
 function addToCart(productId) {
   const product = products.find((p) => p.id === productId);
   if (!product) return;
 
-  const found = cart.find((c) => c.productId === productId);
-  if (found) found.qty += 1;
+  const existing = cart.find((i) => i.productId === productId);
+  if (existing) existing.qty += 1;
   else cart.push({ productId, qty: 1 });
 
   saveCart();
@@ -260,21 +202,19 @@ function addToCart(productId) {
 }
 
 function removeItem(productId) {
-  cart = cart.filter((item) => item.productId !== productId);
+  cart = cart.filter((i) => i.productId !== productId);
   saveCart();
   updateCart();
 }
 
 function changeQty(productId, delta) {
-  const found = cart.find((item) => item.productId === productId);
-  if (!found) return;
-  found.qty += delta;
-
-  if (found.qty <= 0) {
+  const item = cart.find((i) => i.productId === productId);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) {
     removeItem(productId);
     return;
   }
-
   saveCart();
   updateCart();
 }
@@ -294,27 +234,23 @@ function updateCart() {
   if (cart.length === 0) {
     list.innerHTML = "<li>Your cart is empty.</li>";
   } else {
-    list.innerHTML = cart
-      .map((item) => {
-        const product = products.find((p) => p.id === item.productId);
-        if (!product) return "";
-
-        total += product.price * item.qty;
-        count += item.qty;
-
-        return `<li>
-          <div>
-            <strong>${escapeHTML(product.name)}</strong><br>
-            <small>UGX ${product.price.toLocaleString()} × ${item.qty}</small>
-          </div>
-          <div class="qty-controls">
-            <button onclick="changeQty('${item.productId}', -1)">-</button>
-            <button onclick="changeQty('${item.productId}', 1)">+</button>
-            <button onclick="removeItem('${item.productId}')">x</button>
-          </div>
-        </li>`;
-      })
-      .join("");
+    list.innerHTML = cart.map((item) => {
+      const product = products.find((p) => p.id === item.productId);
+      if (!product) return "";
+      total += product.price * item.qty;
+      count += item.qty;
+      return `<li>
+        <div>
+          <strong>${escapeHTML(product.name)}</strong><br>
+          <small>UGX ${product.price.toLocaleString()} × ${item.qty}</small>
+        </div>
+        <div class="qty-controls">
+          <button onclick="changeQty('${item.productId}', -1)">-</button>
+          <button onclick="changeQty('${item.productId}', 1)">+</button>
+          <button onclick="removeItem('${item.productId}')">x</button>
+        </div>
+      </li>`;
+    }).join("");
   }
 
   totalEl.textContent = total.toLocaleString();
@@ -330,18 +266,13 @@ function checkoutWhatsApp() {
   const location = document.getElementById("location")?.value.trim();
   const payment = document.getElementById("payment")?.value.trim();
 
-  if (!name || !phone || !location || !payment) {
-    alert("Please complete all checkout details.");
-    return;
-  }
+  if (!name || !phone || !location || !payment) return alert("Please complete all checkout details.");
 
-  const lines = cart
-    .map((item) => {
-      const product = products.find((p) => p.id === item.productId);
-      if (!product) return "";
-      return `- ${product.name} x${item.qty} (UGX ${(product.price * item.qty).toLocaleString()})`;
-    })
-    .filter(Boolean);
+  const lines = cart.map((item) => {
+    const product = products.find((p) => p.id === item.productId);
+    if (!product) return "";
+    return `- ${product.name} x${item.qty} (UGX ${(product.price * item.qty).toLocaleString()})`;
+  }).filter(Boolean);
 
   const total = cart.reduce((sum, item) => {
     const product = products.find((p) => p.id === item.productId);
@@ -349,7 +280,7 @@ function checkoutWhatsApp() {
   }, 0);
 
   const message = [
-    "New Dropshipping Order",
+    "New SwiftCart Order",
     `Name: ${name}`,
     `Phone: ${phone}`,
     `Location: ${location}`,
@@ -378,23 +309,12 @@ document.addEventListener("click", (event) => {
   if (!cartEl.contains(event.target) && !cartBtn.contains(event.target)) cartEl.classList.remove("open");
 });
 
-(function setupAdminAccess() {
-  const admin = document.querySelector(".admin");
-  if (!admin) return;
-
-  if (!localStorage.getItem("swiftcart_admin")) {
-    const password = prompt("Enter admin password:");
-    if (password === "Tecnopop12#") localStorage.setItem("swiftcart_admin", "true");
-    else admin.style.display = "none";
-  }
-})();
-
 function refreshShopViews() {
   populateCategoryFilter();
   applyFilters();
-  renderAdminProducts();
   renderFeatured();
 }
 
 refreshShopViews();
+updateAdminUI();
 updateCart();
