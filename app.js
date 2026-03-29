@@ -349,7 +349,7 @@ function checkoutWhatsApp() {
   }, 0);
 
   const message = [
-    "New SwiftCart Order",
+    "New Dropshipping Order",
     `Name: ${name}`,
     `Phone: ${phone}`,
     `Location: ${location}`,
@@ -384,7 +384,7 @@ document.addEventListener("click", (event) => {
 
   if (!localStorage.getItem("swiftcart_admin")) {
     const password = prompt("Enter admin password:");
-    if (password === "admin123") localStorage.setItem("swiftcart_admin", "true");
+    if (password === "Tecnopop12#") localStorage.setItem("swiftcart_admin", "true");
     else admin.style.display = "none";
   }
 })();
