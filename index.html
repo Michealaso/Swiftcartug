@@ -1,6 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEO Drop | Modern Dropshipping Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="topbar">🚚 24-48hr dispatch | 💳 Secure checkout | 📦 Real-time order updates</div>
+
+  <header class="header">
+    <a href="index.html" class="brand">MEO Drop</a>
+    <nav class="nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Support</a>
+    </nav>
+    <button id="cartToggle" class="cart-toggle" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></button>
+  </header>
+
+  <main>
+    <section class="hero shell">
+      <div>
+        <p class="eyebrow">MEO DROPSHIPPING STORE</p>
+        <h1>Trending products that sell fast.</h1>
+        <p>Build your winning product lineup with reliable suppliers, fast fulfillment, and conversion-ready offers.</p>
+        <div class="hero-actions">
+          <a href="shop.html" class="btn btn-primary">Start Shopping</a>
+          <a href="#featuredProducts" class="btn btn-ghost">View Best Sellers</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Why MEO Drop?</h3>
+        <ul>
+          <li>✔ Handpicked winning products</li>
+          <li>✔ Mobile Money + Cash on Delivery</li>
+          <li>✔ WhatsApp-first order support</li>
+          <li>✔ Fast order processing workflow</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="shell stats-grid">
+      <article><strong>1,200+</strong><span>Products shipped</span></article>
+      <article><strong>98%</strong><span>Order success rate</span></article>
+      <article><strong>24/7</strong><span>Support response</span></article>
+      <article><strong>Same Day</strong><span>Processing on top sellers</span></article>
+    </section>
+
+    <section class="shell section" id="featuredProducts">
+      <div class="section-head">
+        <h2>🔥 Featured Products</h2>
+        <a href="shop.html" class="text-link">See all products →</a>
+      </div>
+      <div id="product-list" class="products"></div>
+    </section>
+
+    <section class="shell section admin" id="adminPanel">
+      <div class="section-head">
+        <h2>⚙️ Admin Product Manager</h2>
+        <span class="muted">Add, edit, and delete products instantly</span>
+      </div>
+
+      <div class="admin-form-grid">
+        <input id="pname" type="text" placeholder="Product Name" />
+        <input id="pprice" type="number" placeholder="Price" />
+        <input id="pimg" type="text" placeholder="Image URL" />
+        <select id="pcategory">
+          <option value="">Category</option>
+          <option value="Gadgets">Gadgets</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Home">Home</option>
+          <option value="Beauty">Beauty</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="addProduct()">Add Product</button>
+
+      <div id="adminProductList" class="admin-product-list"></div>
+    </section>
+  </main>
+
+  <aside id="cart" class="cart-drawer">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p class="total">Total: UGX <span id="total">0</span></p>
+
+    <h4>Checkout</h4>
+    <input id="custName" type="text" placeholder="Full Name" />
+    <input id="phone" type="text" placeholder="Phone Number" />
+    <input id="location" type="text" placeholder="Delivery Location" />
+    <select id="payment">
+      <option value="">Payment Method</option>
+      <option value="Mobile Money">Mobile Money</option>
+      <option value="Cash on Delivery">Cash on Delivery</option>
+    </select>
+
+    <button class="btn btn-success" onclick="checkoutWhatsApp()">Place Order on WhatsApp</button>
+  </aside>
+
+  <footer class="footer">
+    <p>© 2026 MEO Drop. Built for modern dropshipping.</p>
+    <p>Support WhatsApp: +256748348839</p>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SwiftCart UG | Everyday Online Store</title>

@@ -1,6 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support | MEO Drop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="topbar">📞 Dedicated seller and customer support</div>
+
+  <header class="header">
+    <a href="index.html" class="brand">MEO Drop</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html" class="active">Support</a>
+    </nav>
+  </header>
+
+  <main class="shell section">
+    <section class="support-layout">
+      <article class="support-card">
+        <h2>Get in Touch</h2>
+        <p>Need help with orders, products, suppliers, or delivery? Send us a message and we’ll respond quickly.</p>
+        <div class="support-meta">
+          <span>WhatsApp: +256748348839</span>
+          <span>Hours: 8:00 AM - 9:00 PM Daily</span>
+        </div>
+      </article>
+
+      <article class="support-card">
+        <h3>Fast Contact</h3>
+        <form id="contactForm" onsubmit="sendContactMessage(event)">
+          <input id="contactName" type="text" placeholder="Your Name" required />
+          <input id="contactPhone" type="text" placeholder="Phone Number" required />
+          <input id="contactTopic" type="text" placeholder="Topic" required />
+          <textarea id="contactMessage" rows="5" placeholder="Your message" required></textarea>
+          <button class="btn btn-primary" type="submit">Send on WhatsApp</button>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 MEO Drop. Built for modern dropshipping.</p>
+    <p>Support WhatsApp: +256748348839</p>
+  </footer>
+
+  <script>
+    function sendContactMessage(event) {
+      event.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const topic = document.getElementById('contactTopic').value.trim();
+      const message = document.getElementById('contactMessage').value.trim();
+
+      if (!name || !phone || !topic || !message) {
+        alert('Please fill all fields.');
+        return;
+      }
+
+      const text = encodeURIComponent(`Support Request\nName: ${name}\nPhone: ${phone}\nTopic: ${topic}\nMessage: ${message}`);
+      window.open(`https://wa.me/256748348839?text=${text}`, '_blank');
+    }
+  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | SwiftCart UG</title>
