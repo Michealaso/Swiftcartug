@@ -3,6 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEO Dropshipping | Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-banner">🚀 MEO Dropshipping • Winning products delivered fast across Uganda</div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">MEO <span>Dropshipping</span></a>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div>
+        <p class="eyebrow">Modern eCommerce Store</p>
+        <h1>Find trending products your customers will love.</h1>
+        <p class="lead">Curated for MEO dropshipping: high-demand gadgets, fashion, home essentials, and beauty picks with reliable delivery options.</p>
+        <div class="hero-actions">
+          <a href="shop.html" class="btn btn-primary">Start Selling</a>
+          <a href="#featuredGrid" class="btn btn-ghost">View Featured Products</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Store Metrics</h3>
+        <div class="metric-grid">
+          <article><strong>300+</strong><span>Active products</span></article>
+          <article><strong>4.8★</strong><span>Customer rating</span></article>
+          <article><strong>24h</strong><span>Order processing</span></article>
+          <article><strong>7 days</strong><span>Support available</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section-space">
+      <div class="section-header">
+        <h2>Featured Products</h2>
+        <a href="shop.html" class="link-inline">Explore all products →</a>
+      </div>
+      <div class="products" id="featuredGrid"></div>
+    </section>
+
+    <section class="container benefits section-space">
+      <article>
+        <h4>Fast Fulfillment</h4>
+        <p>Quick dispatch and transparent delivery updates.</p>
+      </article>
+      <article>
+        <h4>Curated Winning Products</h4>
+        <p>Only fast-moving categories suitable for dropshipping.</p>
+      </article>
+      <article>
+        <h4>Simple Checkout</h4>
+        <p>WhatsApp checkout with Mobile Money and cash options.</p>
+      </article>
+    </section>
+  </main>
+
+  <button id="cartButton" onclick="toggleCart(event)">🛒 Cart <span id="cartCount">0</span></button>
+
+  <aside id="cart">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p class="cart-total">Total: UGX <span id="total">0</span></p>
+
+    <h4>Checkout Details</h4>
+    <input type="text" id="custName" placeholder="Full name" />
+    <input type="text" id="phone" placeholder="Phone number" />
+    <input type="text" id="location" placeholder="Delivery location" />
+    <select id="payment">
+      <option value="">Payment method</option>
+      <option value="Mobile Money">Mobile Money</option>
+      <option value="Cash on Delivery">Cash on Delivery</option>
+    </select>
+
+    <button id="orderBtn" onclick="checkoutWhatsApp()">Order via WhatsApp</button>
+  </aside>
+
+  <footer>
+    <p>MEO Dropshipping • Built for modern online selling</p>
+    <p>WhatsApp Support: +256748348839</p>
   <title>MEO DropShip UG | Home</title>
   <link rel="stylesheet" href="style.css" />
 </head>

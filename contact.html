@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEO Dropshipping | Contact</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-banner">📞 Need assistance? Our support team is online daily.</div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">MEO <span>Dropshipping</span></a>
+    <nav>
   <title>MEO DropShip UG | Contact</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -18,6 +27,24 @@
     </nav>
   </header>
 
+  <main class="container section-space">
+    <section class="contact-layout">
+      <article class="contact-card">
+        <h2>Talk to MEO Support</h2>
+        <p class="muted">For product inquiries, order tracking, wholesale, or payment support, send us a message and we'll respond fast.</p>
+        <p><strong>WhatsApp:</strong> +256748348839</p>
+        <p><strong>Hours:</strong> 8:00 AM - 9:00 PM (Daily)</p>
+        <a class="btn btn-primary" href="https://wa.me/256748348839" target="_blank" rel="noopener">Open WhatsApp</a>
+      </article>
+
+      <article class="contact-card">
+        <h3>Send a quick message</h3>
+        <form id="contactForm" onsubmit="sendContactMessage(event)">
+          <input type="text" id="contactName" placeholder="Your name" required />
+          <input type="text" id="contactPhone" placeholder="Phone number" required />
+          <input type="text" id="contactSubject" placeholder="Subject" required />
+          <textarea id="contactMessage" rows="5" placeholder="Your message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send via WhatsApp</button>
   <main class="section">
     <section class="contact-layout">
       <article class="contact-box">
@@ -81,6 +108,9 @@
     </section>
   </main>
 
+  <footer>
+    <p>MEO Dropshipping • Built for modern online selling</p>
+    <p>WhatsApp Support: +256748348839</p>
   <footer class="footer">
     <p>© 2026 MEO DropShip UG • Customer-first dropshipping operations.</p>
   </footer>
@@ -94,6 +124,14 @@
   <script>
     function sendContactMessage(event) {
       event.preventDefault();
+
+      const name = document.getElementById('contactName').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const subject = document.getElementById('contactSubject').value.trim();
+      const message = document.getElementById('contactMessage').value.trim();
+
+      if (!name || !phone || !subject || !message) {
+        alert('Please complete all fields.');
       const name = document.getElementById('contactName').value.trim();
       const phone = document.getElementById('contactPhone').value.trim();
       const topic = document.getElementById('contactTopic').value.trim();
@@ -105,6 +143,12 @@
       }
 
       const text = encodeURIComponent(
+        `Support Request\nName: ${name}\nPhone: ${phone}\nSubject: ${subject}\nMessage: ${message}`
+      );
+
+      window.open(`https://wa.me/256748348839?text=${text}`, '_blank');
+    }
+  </script>
         `Support Request\nName: ${name}\nPhone: ${phone}\nTopic: ${topic}\nMessage: ${message}`
       );
       window.open(`https://wa.me/256748348839?text=${text}`, '_blank');
