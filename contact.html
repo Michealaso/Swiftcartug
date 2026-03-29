@@ -1,82 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | MEO DropHub</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | SwiftCart UG</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="topbar">📞 Contact MEO DropHub support any time</div>
+    <div class="promo-bar">📞 Need help? Contact SwiftCart support anytime.</div>
 
-  <header class="site-header">
-    <a class="brand" href="index.html">MEO <span>DropHub</span></a>
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html" class="active">Contact</a>
-    </nav>
-  </header>
+    <header class="site-header">
+        <div class="logo-wrap">
+            <div class="logo">SwiftCart UG</div>
+            <span class="tag">Your trusted online store in Kampala</span>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
 
-  <main class="page contact-page">
-    <section class="contact-hero">
-      <h1>Need help with an order or product?</h1>
-      <p>We usually reply within minutes on WhatsApp.</p>
-      <a class="btn success" href="https://wa.me/256748348839" target="_blank" rel="noopener">Open WhatsApp</a>
-    </section>
+    <main class="container">
+        <section class="contact-hero split-layout">
+            <div class="contact-copy">
+                <p class="eyebrow">Customer Support</p>
+                <h1>We are here to help you every day.</h1>
+                <p class="muted">Questions about your order, delivery timing, payment, or products? Reach out and we’ll respond quickly.</p>
+                <div class="contact-badges">
+                    <span>✅ Fast replies</span>
+                    <span>✅ Friendly support</span>
+                    <span>✅ WhatsApp ordering help</span>
+                </div>
+                <div class="quick-action-row">
+                    <a href="https://wa.me/256748348839" target="_blank" rel="noopener" class="contact-link">Chat on WhatsApp</a>
+                    <a href="tel:+256748348839" class="contact-link secondary">Call Support</a>
+                </div>
+            </div>
+            <div class="contact-image-card">
+                <img src="1.jpg" alt="SwiftCart customer support team">
+            </div>
+        </section>
 
-    <section class="contact-grid">
-      <article class="contact-card">
-        <h3>WhatsApp</h3>
-        <p>+256748348839</p>
-      </article>
-      <article class="contact-card">
-        <h3>Hours</h3>
-        <p>Mon - Sun: 8:00 AM - 9:00 PM</p>
-      </article>
-      <article class="contact-card">
-        <h3>Coverage</h3>
-        <p>Kampala + nearby areas</p>
-      </article>
-    </section>
+        <section class="contact-highlights">
+            <article class="highlight-item">
+                <h4>Support Response Time</h4>
+                <p>Usually within 5 - 15 minutes during business hours.</p>
+            </article>
+            <article class="highlight-item">
+                <h4>Order Assistance</h4>
+                <p>Need help selecting products? Our team can guide you on WhatsApp.</p>
+            </article>
+            <article class="highlight-item">
+                <h4>Issue Resolution</h4>
+                <p>Missing item or delay? We track and resolve cases quickly.</p>
+            </article>
+        </section>
 
-    <section class="admin contact-form-wrap">
-      <h3>Send a Support Message</h3>
-      <form id="contactForm" onsubmit="sendContactMessage(event)">
-        <input id="contactName" type="text" placeholder="Your Name" required />
-        <input id="contactPhone" type="text" placeholder="Your Phone Number" required />
-        <input id="contactTopic" type="text" placeholder="Topic" required />
-        <textarea id="contactMessage" rows="5" placeholder="Message" required></textarea>
-        <button class="btn primary" type="submit">Send via WhatsApp</button>
-      </form>
-    </section>
-  </main>
+        <section class="contact-grid">
+            <article class="contact-card">
+                <h3>Call or WhatsApp</h3>
+                <p>+256748348839</p>
+                <a href="https://wa.me/256748348839" target="_blank" rel="noopener" class="contact-link">Open WhatsApp Chat</a>
+            </article>
 
-  <footer class="site-footer">
-    <p>MEO DropHub — Modern dropshipping storefront</p>
-    <p>WhatsApp Support: +256748348839</p>
-  </footer>
+            <article class="contact-card">
+                <h3>Delivery Coverage</h3>
+                <p>Kampala and nearby areas</p>
+                <p class="muted">Same-day delivery available for many locations.</p>
+            </article>
 
-  <script>
-    function sendContactMessage(event) {
-      event.preventDefault();
+            <article class="contact-card">
+                <h3>Working Hours</h3>
+                <p>Mon - Sun: 8:00 AM - 9:00 PM</p>
+                <p class="muted">Online orders accepted 24/7.</p>
+            </article>
+        </section>
 
-      const name = document.getElementById('contactName').value.trim();
-      const phone = document.getElementById('contactPhone').value.trim();
-      const topic = document.getElementById('contactTopic').value.trim();
-      const message = document.getElementById('contactMessage').value.trim();
+        <section class="support-process">
+            <h2>How support works</h2>
+            <div class="process-grid">
+                <article>
+                    <span>1</span>
+                    <h4>Message us</h4>
+                    <p>Tell us your issue or question on WhatsApp.</p>
+                </article>
+                <article>
+                    <span>2</span>
+                    <h4>Get guided help</h4>
+                    <p>We review your request and share clear next steps.</p>
+                </article>
+                <article>
+                    <span>3</span>
+                    <h4>Problem solved</h4>
+                    <p>Your order update, replacement, or confirmation is handled quickly.</p>
+                </article>
+            </div>
+        </section>
 
-      if (!name || !phone || !topic || !message) {
-        alert('Please fill all fields.');
-        return;
-      }
+        <section class="contact-layout-2">
+            <section class="contact-form-wrap">
+                <h2>Send a quick message</h2>
+                <p class="muted">This will open WhatsApp with your message pre-filled.</p>
+                <form id="contactForm" onsubmit="sendContactMessage(event)">
+                    <input type="text" id="contactName" placeholder="Your Name" required>
+                    <input type="tel" id="contactPhone" placeholder="Phone Number" required>
+                    <input type="text" id="contactTopic" placeholder="Topic (e.g. Delivery, Payment)" required>
+                    <textarea id="contactMessage" placeholder="Write your message" rows="5" required></textarea>
+                    <button type="submit" id="btn">Send via WhatsApp</button>
+                </form>
+            </section>
 
-      const text = encodeURIComponent(
-        `Support Request\nName: ${name}\nPhone: ${phone}\nTopic: ${topic}\nMessage: ${message}`
-      );
+            <aside class="contact-side-panel">
+                <h3>Need quick answers?</h3>
+                <ul class="faq-list">
+                    <li>
+                        <strong>How fast is delivery?</strong>
+                        <p>Most Kampala orders are delivered the same day.</p>
+                    </li>
+                    <li>
+                        <strong>How can I pay?</strong>
+                        <p>Mobile Money and Cash on Delivery are available.</p>
+                    </li>
+                    <li>
+                        <strong>Can I edit my order?</strong>
+                        <p>Yes, message us on WhatsApp before dispatch.</p>
+                    </li>
+                </ul>
+                <div class="service-map">
+                    <h4>Service area</h4>
+                    <p class="muted">Kampala • Ntinda • Najjera • Kisaasi • Muyenga • Entebbe Road</p>
+                </div>
+            </aside>
+        <section class="contact-form-wrap">
+            <h2>Send a quick message</h2>
+            <p class="muted">This will open WhatsApp with your message pre-filled.</p>
+            <form id="contactForm" onsubmit="sendContactMessage(event)">
+                <input type="text" id="contactName" placeholder="Your Name" required>
+                <input type="tel" id="contactPhone" placeholder="Phone Number" required>
+                <input type="text" id="contactTopic" placeholder="Topic (e.g. Delivery, Payment)" required>
+                <textarea id="contactMessage" placeholder="Write your message" rows="5" required></textarea>
+                <button type="submit" id="btn">Send via WhatsApp</button>
+            </form>
+        </section>
+    </main>
 
-      window.open(`https://wa.me/256748348839?text=${text}`, '_blank');
-    }
-  </script>
+    <footer>
+        <p>Fast delivery across Kampala | Pay with Mobile Money</p>
+        <p>WhatsApp: +256748348839</p>
+    </footer>
+
+    <script>
+        function sendContactMessage(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('contactName').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const topic = document.getElementById('contactTopic').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+
+            if (!name || !phone || !topic || !message) {
+                alert('Please fill in all fields before sending.');
+                return;
+            }
+
+            const text = encodeURIComponent(
+                `Support Request\nName: ${name}\nPhone: ${phone}\nTopic: ${topic}\nMessage: ${message}`
+            );
+
+            window.open(`https://wa.me/256748348839?text=${text}`, '_blank');
+        }
+    </script>
 </body>
 </html>
