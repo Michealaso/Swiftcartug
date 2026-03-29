@@ -53,23 +53,23 @@ function normalizeCartItem(item) {
   return { productId, qty: Math.floor(qty) };
 }
 
-let products = safeRead("meo_products", []).map(normalizeProduct).filter(Boolean);
+let products = safeRead("swiftcart_products", []).map(normalizeProduct).filter(Boolean);
 if (products.length === 0) {
   products = [...DEFAULT_PRODUCTS];
-  localStorage.setItem("meo_products", JSON.stringify(products));
+  localStorage.setItem("swiftcart_products", JSON.stringify(products));
 }
 
-let cart = safeRead("meo_cart", []).map(normalizeCartItem).filter(Boolean);
+let cart = safeRead("swiftcart_cart", []).map(normalizeCartItem).filter(Boolean);
 cart = cart.filter((item) => products.some((p) => p.id === item.productId));
 
 let editingProductId = null;
 
 function saveProducts() {
-  localStorage.setItem("meo_products", JSON.stringify(products));
+  localStorage.setItem("swiftcart_products", JSON.stringify(products));
 }
 
 function saveCart() {
-  localStorage.setItem("meo_cart", JSON.stringify(cart));
+  localStorage.setItem("swiftcart_cart", JSON.stringify(cart));
 }
 
 function getFormElements() {
@@ -382,9 +382,9 @@ document.addEventListener("click", (event) => {
   const admin = document.querySelector(".admin");
   if (!admin) return;
 
-  if (!localStorage.getItem("meo_admin")) {
+  if (!localStorage.getItem("swiftcart_admin")) {
     const password = prompt("Enter admin password:");
-    if (password === "admin123") localStorage.setItem("meo_admin", "true");
+    if (password === "Tecnopop12#") localStorage.setItem("swiftcart_admin", "true");
     else admin.style.display = "none";
   }
 })();
