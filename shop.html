@@ -1,68 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SwiftCart</title>
-<style>
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop | MEO DropHub</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="topbar">🛍️ Shop trending products and start scaling today</div>
 
-<header>
-<div class="logo">SwiftCart UG</div>
-<nav>
-<a href="index.html">Home</a>
-<a href="shop.html">Shop</a>
-<a href="contact.html">Contact</a>
-</nav>
-</header>
+  <header class="site-header">
+    <a class="brand" href="index.html">MEO <span>DropHub</span></a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-<div class="container">
-<h2>🔥 Trending Products</h2>
-<div class="products" id="product-list"></div>
+  <main class="page">
+    <section class="section">
+      <div class="section-head">
+        <h2>🛒 Full Product Catalog</h2>
+        <p>Find the next winner for your dropshipping business.</p>
+      </div>
+      <div id="product-list" class="products"></div>
+    </section>
 
-<!-- ADMIN PANEL -->
-<div class="admin">
-<h3>⚙️ Admin Panel (Add Product)</h3>
-<input type="text" id="pname" placeholder="Product Name">
-<input type="number" id="pprice" placeholder="Price">
-<input type="text" id="pimg" placeholder="Image URL">
-<button onclick="addProduct()">Add Product</button>
-</div>
-</div>
+    <section class="admin" id="adminPanel">
+      <div class="admin-top">
+        <h3>⚙️ Admin Product Manager</h3>
+        <span>Add, edit, and delete products instantly</span>
+      </div>
+      <div class="admin-form">
+        <input id="pname" type="text" placeholder="Product Name" />
+        <input id="pprice" type="number" placeholder="Price" />
+        <input id="pimg" type="text" placeholder="Image URL" />
+        <button onclick="addProduct()" class="btn primary">Add Product</button>
+      </div>
+      <div id="adminProductList" class="admin-product-list"></div>
+    </section>
+  </main>
 
-<!-- Cart Button -->
-<div id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></div>
+  <button id="cartButton" onclick="toggleCart(event)">🛒 <span id="cartCount">0</span></button>
 
-<div id="cart">
-<h3>🛍 Cart</h3>
-<ul id="cart-items"></ul>
-<p><strong>Total: UGX <span id="total">0</span></strong></p>
+  <aside id="cart" class="cart-panel">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p class="total">Total: UGX <span id="total">0</span></p>
 
-<h4>Checkout</h4>
-<input type="text" id="custName" placeholder="Your Name">
-<input type="text" id="phone" placeholder="Phone Number">
-<input type="text" id="location" placeholder="Delivery Location">
-<select id="payment">
-<option value="">Payment Method</option>
-<option value="Mobile Money">Mobile Money</option>
-<option value="Cash on Delivery">Cash on Delivery</option>
-</select>
+    <h4>Checkout</h4>
+    <input id="custName" type="text" placeholder="Full Name" />
+    <input id="phone" type="text" placeholder="Phone Number" />
+    <input id="location" type="text" placeholder="Delivery Location" />
+    <select id="payment">
+      <option value="">Payment Method</option>
+      <option value="Mobile Money">Mobile Money</option>
+      <option value="Cash on Delivery">Cash on Delivery</option>
+    </select>
+    <button id="orderBtn" class="btn success" onclick="checkoutWhatsApp()">Order via WhatsApp</button>
+  </aside>
 
-<button onclick="checkoutWhatsApp()" id="orderBtn">Order via WhatsApp</button>
-</div>
+  <footer class="site-footer">
+    <p>MEO DropHub — Modern dropshipping storefront</p>
+    <p>WhatsApp Support: +256748348839</p>
+  </footer>
 
-<footer>
-<p>Fast delivery across Kampala | Pay with Mobile Money</p>
-<p>WhatsApp: +256748348839</p>
-</footer>
-
-<script src="app.js">
-    
-</script>
-
+  <script src="app.js"></script>
 </body>
 </html>
