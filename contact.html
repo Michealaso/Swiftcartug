@@ -1,36 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swiftcart</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEO Dropshipping | Contact</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <div class="logo">SwiftCart UG</div>
-        <nav>
-        <a href="index.html">Home</a>
-        <a href="shop.html">Shop</a>
-        <a href="contact.html">Contact</a>
-        </nav>
-        </header>
+  <div class="top-banner">📞 Need assistance? Our support team is online daily.</div>
 
-        <div class="main">
-            <div class="img">
-                <img src="1.jpg" alt="">
-            </div><br/>
-             <h1>Hello !</h1>
-             <h3>In case of any thing you can contact me</h3>
+  <header class="site-header">
+    <a class="brand" href="index.html">MEO <span>Dropshipping</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
 
-             <button onclick="checkoutWhatsApp()" id="btn">
-                Here please
-             </button>
-        </div>
-               
-        <footer>
-            <p>Fast delivery across Kampala | Pay with Mobile Money</p>
-            <p>WhatsApp: +256748348839</p>
-            </footer>
+  <main class="container section-space">
+    <section class="contact-layout">
+      <article class="contact-card">
+        <h2>Talk to MEO Support</h2>
+        <p class="muted">For product inquiries, order tracking, wholesale, or payment support, send us a message and we'll respond fast.</p>
+        <p><strong>WhatsApp:</strong> +256748348839</p>
+        <p><strong>Hours:</strong> 8:00 AM - 9:00 PM (Daily)</p>
+        <a class="btn btn-primary" href="https://wa.me/256748348839" target="_blank" rel="noopener">Open WhatsApp</a>
+      </article>
+
+      <article class="contact-card">
+        <h3>Send a quick message</h3>
+        <form id="contactForm" onsubmit="sendContactMessage(event)">
+          <input type="text" id="contactName" placeholder="Your name" required />
+          <input type="text" id="contactPhone" placeholder="Phone number" required />
+          <input type="text" id="contactSubject" placeholder="Subject" required />
+          <textarea id="contactMessage" rows="5" placeholder="Your message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send via WhatsApp</button>
+        </form>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>MEO Dropshipping • Built for modern online selling</p>
+    <p>WhatsApp Support: +256748348839</p>
+  </footer>
+
+  <script>
+    function sendContactMessage(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('contactName').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const subject = document.getElementById('contactSubject').value.trim();
+      const message = document.getElementById('contactMessage').value.trim();
+
+      if (!name || !phone || !subject || !message) {
+        alert('Please complete all fields.');
+        return;
+      }
+
+      const text = encodeURIComponent(
+        `Support Request\nName: ${name}\nPhone: ${phone}\nSubject: ${subject}\nMessage: ${message}`
+      );
+
+      window.open(`https://wa.me/256748348839?text=${text}`, '_blank');
+    }
+  </script>
 </body>
 </html>
