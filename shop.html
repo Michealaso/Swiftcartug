@@ -70,9 +70,16 @@
       <h3>Your Cart</h3>
       <button class="icon-close" onclick="closeCart()">✕</button>
     </div>
-    <ul id="cart-items"></ul>
-    <p id="cartEmptyHint" class="muted">Add items to begin checkout.</p>
-    <p class="cart-total">Total: UGX <span id="total">0</span></p>
+
+    <div class="cart-body">
+      <ul id="cart-items"></ul>
+      <p id="cartEmptyHint" class="muted">Add items to begin checkout.</p>
+    </div>
+
+    <div class="cart-summary">
+      <p class="cart-total">Total: UGX <span id="total">0</span></p>
+      <button id="clearCartBtn" onclick="clearCart()">Clear cart</button>
+    </div>
 
     <h4>Checkout Details</h4>
     <input type="text" id="custName" placeholder="Full name" />

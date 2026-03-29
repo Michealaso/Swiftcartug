@@ -207,6 +207,13 @@ function removeItem(productId) {
   updateCart();
 }
 
+function clearCart() {
+  if (cart.length === 0) return;
+  cart = [];
+  saveCart();
+  updateCart();
+}
+
 function changeQty(productId, delta) {
   const item = cart.find((i) => i.productId === productId);
   if (!item) return;
@@ -224,6 +231,8 @@ function updateCart() {
   const totalEl = document.getElementById("total");
   const countEl = document.getElementById("cartCount");
   const emptyHint = document.getElementById("cartEmptyHint");
+  const orderBtn = document.getElementById("orderBtn");
+  const clearBtn = document.getElementById("clearCartBtn");
   if (!list || !totalEl || !countEl) return;
 
   const validIds = new Set(products.map((p) => p.id));
@@ -235,8 +244,12 @@ function updateCart() {
   if (cart.length === 0) {
     list.innerHTML = "<li>Your cart is empty.</li>";
     if (emptyHint) emptyHint.style.display = "block";
+    if (clearBtn) clearBtn.disabled = true;
+    if (orderBtn) orderBtn.disabled = true;
   } else {
     if (emptyHint) emptyHint.style.display = "none";
+    if (clearBtn) clearBtn.disabled = false;
+    if (orderBtn) orderBtn.disabled = false;
     list.innerHTML = cart.map((item) => {
       const product = products.find((p) => p.id === item.productId);
       if (!product) return "";
