@@ -65,6 +65,30 @@ let editingProductId = null;
 function saveProducts() { localStorage.setItem("swiftcart_products", JSON.stringify(products)); }
 function saveCart() { localStorage.setItem("swiftcart_cart", JSON.stringify(cart)); }
 
+async function fetchProductsFromServer() {
+  try {
+    const res = await fetch("/api/products", { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!Array.isArray(data)) return null;
+    return data.map(normalizeProduct).filter(Boolean);
+  } catch {
+    return null;
+  }
+}
+
+async function pushProductsToServer() {
+  try {
+    await fetch("/api/products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(products)
+    });
+  } catch {
+    // keep local fallback silently
+  }
+}
+
 function renderProductGrid(targetId, list) {
   const grid = document.getElementById(targetId);
   if (!grid) return;
@@ -203,6 +227,7 @@ function saveProduct() {
   }
 
   saveProducts();
+  pushProductsToServer();
   refreshShopViews();
   renderAdminProductList();
   resetAdminForm();
@@ -246,6 +271,7 @@ function deleteProduct(productId) {
 
   saveProducts();
   saveCart();
+  pushProductsToServer();
   refreshShopViews();
   renderAdminProductList();
   updateCart();
@@ -418,6 +444,18 @@ function refreshShopViews() {
   renderFeatured();
 }
 
-refreshShopViews();
-updateAdminUI();
-updateCart();
+async function initializeStore() {
+  const remoteProducts = await fetchProductsFromServer();
+  if (remoteProducts && remoteProducts.length > 0) {
+    products = remoteProducts;
+    saveProducts();
+  } else if (products.length > 0) {
+    pushProductsToServer();
+  }
+
+  refreshShopViews();
+  updateAdminUI();
+  updateCart();
+}
+
+initializeStore();
