@@ -57,9 +57,13 @@
           <input type="text" id="pcategory" placeholder="Category (e.g. Gadgets)" />
         </div>
         <div class="admin-action-row">
-          <button id="saveProductBtn" onclick="addProduct()">Add Product</button>
+          <button id="saveProductBtn" onclick="saveProduct()">Add Product</button>
+          <button id="cancelEditBtn" class="btn-cancel" onclick="cancelEdit()" style="display:none;">Cancel Edit</button>
+        </div>
+        <div class="admin-action-row">
           <button id="adminLogoutBtn" class="btn-cancel" onclick="adminLogout()">Logout</button>
         </div>
+        <div class="admin-list" id="adminProductList"></div>
       </div>
     </section>
   </main>

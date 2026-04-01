@@ -58,7 +58,9 @@ if (products.length === 0) {
 }
 
 let cart = safeRead("swiftcart_cart", []).map(normalizeCartItem).filter(Boolean);
-cart = cart.filter((i) => products.some((p) => p.id === i.productId));
+cart = cart.filter((item) => products.some((p) => p.id === item.productId));
+
+let editingProductId = null;
 
 function saveProducts() { localStorage.setItem("swiftcart_products", JSON.stringify(products)); }
 function saveCart() { localStorage.setItem("swiftcart_cart", JSON.stringify(cart)); }
@@ -66,6 +68,7 @@ function saveCart() { localStorage.setItem("swiftcart_cart", JSON.stringify(cart
 function renderProductGrid(targetId, list) {
   const grid = document.getElementById(targetId);
   if (!grid) return;
+
   if (list.length === 0) {
     grid.innerHTML = '<p class="muted">No products found.</p>';
     return;
@@ -78,18 +81,18 @@ function renderProductGrid(targetId, list) {
       <h4>${escapeHTML(p.name)}</h4>
       <p>UGX ${p.price.toLocaleString()}</p>
       <button onclick="addToCart('${p.id}')">Add to Cart</button>
-    </article>
-  `).join("");
+    </article>`).join("");
 }
 
 function renderFeatured() {
   const featured = products.filter((p) => p.featured).slice(0, 4);
-  renderProductGrid("featuredGrid", featured.length > 0 ? featured : products.slice(0, 4));
+  renderProductGrid("featuredGrid", featured.length ? featured : products.slice(0, 4));
 }
 
 function populateCategoryFilter() {
   const select = document.getElementById("categoryFilter");
   if (!select) return;
+
   const categories = [...new Set(products.map((p) => p.category))].sort((a, b) => a.localeCompare(b));
   select.innerHTML = '<option value="all">All categories</option>';
   categories.forEach((cat) => {
@@ -118,6 +121,24 @@ function isAdmin() {
   return localStorage.getItem("swiftcart_admin") === "true";
 }
 
+function resetAdminForm() {
+  const nameEl = document.getElementById("pname");
+  const priceEl = document.getElementById("pprice");
+  const imgEl = document.getElementById("pimg");
+  const categoryEl = document.getElementById("pcategory");
+  const saveBtn = document.getElementById("saveProductBtn");
+  const cancelBtn = document.getElementById("cancelEditBtn");
+
+  if (nameEl) nameEl.value = "";
+  if (priceEl) priceEl.value = "";
+  if (imgEl) imgEl.value = "";
+  if (categoryEl) categoryEl.value = "";
+
+  editingProductId = null;
+  if (saveBtn) saveBtn.textContent = "Add Product";
+  if (cancelBtn) cancelBtn.style.display = "none";
+}
+
 function updateAdminUI() {
   const panel = document.getElementById("adminPanel");
   if (!panel) return;
@@ -130,10 +151,12 @@ function updateAdminUI() {
     if (status) status.textContent = "Unlocked";
     if (loginBtn) loginBtn.style.display = "none";
     if (formArea) formArea.style.display = "block";
+    renderAdminProductList();
   } else {
     if (status) status.textContent = "Locked";
     if (loginBtn) loginBtn.style.display = "block";
     if (formArea) formArea.style.display = "none";
+    resetAdminForm();
   }
 }
 
@@ -152,21 +175,17 @@ function adminLogout() {
   updateAdminUI();
 }
 
-function addProduct() {
-  if (!isAdmin()) {
-    alert("Only admin can add products.");
-    return;
-  }
+function saveProduct() {
+  if (!isAdmin()) return alert("Only admin can manage products.");
 
   const nameEl = document.getElementById("pname");
   const priceEl = document.getElementById("pprice");
   const imgEl = document.getElementById("pimg");
   const categoryEl = document.getElementById("pcategory");
-
   if (!nameEl || !priceEl || !imgEl || !categoryEl) return;
 
-  const product = normalizeProduct({
-    id: createId(),
+  const normalized = normalizeProduct({
+    id: editingProductId || createId(),
     name: nameEl.value,
     price: Number(priceEl.value),
     img: imgEl.value,
@@ -174,26 +193,90 @@ function addProduct() {
     featured: false
   });
 
-  if (!product) {
-    alert("Please enter valid product details.");
-    return;
+  if (!normalized) return alert("Please enter valid product details.");
+
+  if (editingProductId) {
+    const index = products.findIndex((p) => p.id === editingProductId);
+    if (index >= 0) products[index] = { ...products[index], ...normalized };
+  } else {
+    products.unshift(normalized);
   }
 
-  products.unshift(product);
   saveProducts();
   refreshShopViews();
+  renderAdminProductList();
+  resetAdminForm();
+}
 
-  nameEl.value = "";
-  priceEl.value = "";
-  imgEl.value = "";
-  categoryEl.value = "";
+function startEditProduct(productId) {
+  if (!isAdmin()) return;
+  const product = products.find((p) => p.id === productId);
+  if (!product) return;
+
+  const nameEl = document.getElementById("pname");
+  const priceEl = document.getElementById("pprice");
+  const imgEl = document.getElementById("pimg");
+  const categoryEl = document.getElementById("pcategory");
+  const saveBtn = document.getElementById("saveProductBtn");
+  const cancelBtn = document.getElementById("cancelEditBtn");
+  if (!nameEl || !priceEl || !imgEl || !categoryEl) return;
+
+  nameEl.value = product.name;
+  priceEl.value = product.price;
+  imgEl.value = product.img;
+  categoryEl.value = product.category;
+
+  editingProductId = productId;
+  if (saveBtn) saveBtn.textContent = "Update Product";
+  if (cancelBtn) cancelBtn.style.display = "block";
+}
+
+function cancelEdit() {
+  resetAdminForm();
+}
+
+function deleteProduct(productId) {
+  if (!isAdmin()) return;
+  const product = products.find((p) => p.id === productId);
+  if (!product) return;
+  if (!confirm(`Delete ${product.name}?`)) return;
+
+  products = products.filter((p) => p.id !== productId);
+  cart = cart.filter((item) => item.productId !== productId);
+
+  saveProducts();
+  saveCart();
+  refreshShopViews();
+  renderAdminProductList();
+  updateCart();
+
+  if (editingProductId === productId) resetAdminForm();
+}
+
+function renderAdminProductList() {
+  const list = document.getElementById("adminProductList");
+  if (!list) return;
+
+  list.innerHTML = products.map((p) => `
+    <div class="admin-item">
+      <img src="${p.img}" alt="${escapeHTML(p.name)}" onerror="this.src='https://via.placeholder.com/120x120?text=No+Image'" />
+      <div>
+        <h5>${escapeHTML(p.name)}</h5>
+        <p>${escapeHTML(p.category)} • UGX ${p.price.toLocaleString()}</p>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-small" onclick="startEditProduct('${p.id}')">Edit</button>
+        <button class="btn-small danger" onclick="deleteProduct('${p.id}')">Delete</button>
+      </div>
+    </div>
+  `).join("");
 }
 
 function addToCart(productId) {
   const product = products.find((p) => p.id === productId);
   if (!product) return;
 
-  const existing = cart.find((i) => i.productId === productId);
+  const existing = cart.find((item) => item.productId === productId);
   if (existing) existing.qty += 1;
   else cart.push({ productId, qty: 1 });
 
@@ -202,7 +285,7 @@ function addToCart(productId) {
 }
 
 function removeItem(productId) {
-  cart = cart.filter((i) => i.productId !== productId);
+  cart = cart.filter((item) => item.productId !== productId);
   saveCart();
   updateCart();
 }
@@ -218,10 +301,7 @@ function changeQty(productId, delta) {
   const item = cart.find((i) => i.productId === productId);
   if (!item) return;
   item.qty += delta;
-  if (item.qty <= 0) {
-    removeItem(productId);
-    return;
-  }
+  if (item.qty <= 0) return removeItem(productId);
   saveCart();
   updateCart();
 }
@@ -250,6 +330,7 @@ function updateCart() {
     if (emptyHint) emptyHint.style.display = "none";
     if (clearBtn) clearBtn.disabled = false;
     if (orderBtn) orderBtn.disabled = false;
+
     list.innerHTML = cart.map((item) => {
       const product = products.find((p) => p.id === item.productId);
       if (!product) return "";
@@ -282,7 +363,6 @@ function checkoutWhatsApp() {
   const phone = document.getElementById("phone")?.value.trim();
   const location = document.getElementById("location")?.value.trim();
   const payment = document.getElementById("payment")?.value.trim();
-
   if (!name || !phone || !location || !payment) return alert("Please complete all checkout details.");
 
   const lines = cart.map((item) => {
