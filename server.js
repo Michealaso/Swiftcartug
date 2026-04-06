@@ -46,6 +46,10 @@ const server = http.createServer((req, res) => {
 
   if (req.method === 'OPTIONS') return send(res, 204, '');
 
+  if (url.pathname === '/api/health' && req.method === 'GET') {
+    return send(res, 200, JSON.stringify({ ok: true, service: 'swiftcart-api' }), MIME['.json']);
+  }
+
   if (url.pathname === '/api/products' && req.method === 'GET') {
     const products = safeReadProducts();
     return send(res, 200, JSON.stringify(products), MIME['.json']);
